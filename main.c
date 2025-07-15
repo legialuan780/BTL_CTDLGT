@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
 struct Dictionary{
-	char en[100];
-	char vi[100];
-	int order; 
+	char en[100];// tieng anh
+	char vi[100];// nghia tieng viet
+	int order; // so thu tu  
 };
 
 typedef struct node
