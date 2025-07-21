@@ -77,16 +77,27 @@ void dlist::addLast(Word &x)
 void dlist::search(string word)
 {
   Node *p = head;
+  Node *q;
   while (p != NULL)
   {
-    if (p->data.en.compare(word) == 0)
+    if (p->data.en == word)
     {
-      cout << "Tim thay tu: " << p->data.en << " - " << endl;
+      cout << "Tim thay tu: " << p->data.en << " - " << p->data.vi << " - id " << p->data.id << endl;
+      if(p == head) // If the found node is already at the head
+      {
+        return; // No need to move it
+      }
+      q->next = p->next; // Remove the found node from the list
+      p->next=head; // Move the found node to the head
+      p->prev=NULL;
+      head=p;
       return;
     }
+    q=p;
     p = p->next;
   }
   cout << "Khong tim thay tu" << endl;
+  return;
 }
 
 void dlist::display()
@@ -119,5 +130,10 @@ int main()
     string word;
     getline(cin, word);
     ds.search(word);
+     ds.display();
+      cout << "Nhap tu can tim: ";
+    string word2;
+    getline(cin, word2);
+    ds.search(word2);
     return 0;
 }
