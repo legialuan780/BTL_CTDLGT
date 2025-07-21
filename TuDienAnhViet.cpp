@@ -10,10 +10,11 @@ typedef struct word {
 int currentID = 0; 
 
 void inputWord(Word &w) {
+   cin.ignore(); 
     cout << "Nhap tu tieng Anh: ";
-    cin >> w.en;
+    getline(cin, w.en);
     cout << "Nhap nghia tieng Viet: ";
-    cin >> w.vi;
+    getline(cin, w.vi);
     w.id = ++currentID;
 }
 
@@ -39,3 +40,86 @@ typedef struct dlist {
     void display();
 } Dlist;
 
+dlist::dlist() {
+    head = tail = NULL;
+    size = 0;
+}
+
+Node *dlist::createNode(Word &x) {
+    Node *p = new Node;
+    p->data = x;
+    p->prev = NULL;
+    p->next = NULL;
+    return p;
+}
+
+void dlist::addFirst(Word &x)
+{
+  Node *a = createNode(x);
+  if (a == NULL)
+  {
+    cout << "Het bo nho";
+  }
+  else if (head == NULL)
+  {
+    head = tail = a;
+    size++;
+  }
+  else
+  {
+    a->prev = NULL;
+    a->next = head;
+    head->prev = a;
+    head = a;
+    size++;
+  }
+}
+void dlist::addLast(Word &x)
+{
+   Node *a = createNode(x);
+  if (a == NULL)
+  {
+    cout << "het bo nho";
+  }
+  else if (head == NULL)
+  {
+    head = tail = a;
+    size++;
+  }
+  else
+  {
+    tail->next = a;
+    a->prev = tail;
+    tail = a;
+    size++;
+  }
+
+}
+
+void dlist::display()
+{
+  for (Node *i = head; i != NULL; i = i->next)
+  {
+    cout << i->data.id << ". " << i->data.en << " - " << i->data.vi << " "<<endl;
+  }
+  if (head == NULL)
+  {
+    cout << "Khong co phan tu";
+  }
+}
+
+int main()
+{
+    Word w;
+    Dlist ds;
+    cout << "Nhap so luong tu: ";
+    int n;
+    cin >> n;
+    cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
+    for (int i = 0; i < n; i++) {
+        inputWord(w);
+        ds.addLast(w);
+    }
+    cout << "Danh sach tu dien:\n";
+    ds.display();
+}
