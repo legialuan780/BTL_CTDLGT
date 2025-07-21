@@ -10,7 +10,7 @@ typedef struct word {
 int currentID = 0; 
 
 void inputWord(Word &w) {
-   cin.ignore(); 
+    cin.ignore(); 
     cout << "Nhap tu tieng Anh: ";
     getline(cin, w.en);
     cout << "Nhap nghia tieng Viet: ";
@@ -32,10 +32,8 @@ typedef struct dlist {
      dlist();
   // ham tao Node
     Node *createNode(Word &x);
-    void addFirst(Word &x);
     void addLast(Word &x);
-    void insert(Word &x, int p);
-    void search(Word &x);
+    void search(string word);
     void remove(int p);
     void display();
 } Dlist;
@@ -53,27 +51,7 @@ Node *dlist::createNode(Word &x) {
     return p;
 }
 
-void dlist::addFirst(Word &x)
-{
-  Node *a = createNode(x);
-  if (a == NULL)
-  {
-    cout << "Het bo nho";
-  }
-  else if (head == NULL)
-  {
-    head = tail = a;
-    size++;
-  }
-  else
-  {
-    a->prev = NULL;
-    a->next = head;
-    head->prev = a;
-    head = a;
-    size++;
-  }
-}
+
 void dlist::addLast(Word &x)
 {
    Node *a = createNode(x);
@@ -96,11 +74,26 @@ void dlist::addLast(Word &x)
 
 }
 
+void dlist::search(string word)
+{
+  Node *p = head;
+  while (p != NULL)
+  {
+    if (p->data.en.compare(word) == 0)
+    {
+      cout << "Tim thay tu: " << p->data.en << " - " << endl;
+      return;
+    }
+    p = p->next;
+  }
+  cout << "Khong tim thay tu" << endl;
+}
+
 void dlist::display()
 {
   for (Node *i = head; i != NULL; i = i->next)
   {
-    cout << i->data.id << ". " << i->data.en << " - " << i->data.vi << " "<<endl;
+    cout << "(" << i->data.id << ") " << i->data.en << " - " << i->data.vi << " "<<endl;
   }
   if (head == NULL)
   {
@@ -122,4 +115,9 @@ int main()
     }
     cout << "Danh sach tu dien:\n";
     ds.display();
+    cout << "Nhap tu can tim: ";
+    string word;
+    getline(cin, word);
+    ds.search(word);
+    return 0;
 }
