@@ -83,12 +83,12 @@ void dlist::search(string word)
     if (p->data.en == word)
     {
       cout << "Tim thay tu: " << p->data.en << " - " << p->data.vi << " - id " << p->data.id << endl;
-      if(p == head) // If the found node is already at the head
+      if(p == head) // Neu node da o dau danh sach
       {
-        return; // No need to move it
+        return; // Khong can di chuyen
       }
-      q->next = p->next; // Remove the found node from the list
-      p->next=head; // Move the found node to the head
+      q->next = p->next; // Xoa node da tim thay khoi danh sach
+      p->next=head; // Di chuyen node da tim thay ve dau
       p->prev=NULL;
       head=p;
       return;
