@@ -20,7 +20,7 @@ void inputWord(Word &w) {
 
 typedef struct node {
     struct node *prev;
-    Word data;
+    Word* data; //dung con tro
     struct node *next;
 } Node;
 
@@ -38,6 +38,32 @@ typedef struct dlist {
     void display();
 } Dlist;
 
+int main()
+{
+    Word w;
+    Dlist ds;
+    cout << "Nhap so luong tu: ";
+    int n;
+    cin >> n;
+    cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
+    for (int i = 0; i < n; i++) {
+        inputWord(w);
+        ds.addLast(w);
+    }
+    cout << "Danh sach tu dien:\n";
+    ds.display();
+    cout << "Nhap tu can tim: ";
+    string word;
+    getline(cin, word);
+    ds.search(word);
+     ds.display();
+      cout << "Nhap tu can tim: ";
+    string word2;
+    getline(cin, word2);
+    ds.search(word2);
+    return 0;
+}
+
 dlist::dlist() {
     head = tail = NULL;
     size = 0;
@@ -45,7 +71,9 @@ dlist::dlist() {
 
 Node *dlist::createNode(Word &x) {
     Node *p = new Node;
-    p->data = x;
+    p->data = new Word;
+    *(p->data) = x;
+    
     p->prev = NULL;
     p->next = NULL;
     return p;
@@ -80,9 +108,9 @@ void dlist::search(string word)
   Node *q;
   while (p != NULL)
   {
-    if (p->data.en == word)
+    if (p->data->en == word)
     {
-      cout << "Tim thay tu: " << p->data.en << " - " << p->data.vi << " - id " << p->data.id << endl;
+      cout << "Tim thay tu: " << p->data->en << " - " << p->data->vi << " - id " << p->data->id << endl;
       if(p == head) // Neu node da o dau danh sach
       {
         return; // Khong can di chuyen
@@ -104,36 +132,10 @@ void dlist::display()
 {
   for (Node *i = head; i != NULL; i = i->next)
   {
-    cout << "(" << i->data.id << ") " << i->data.en << " - " << i->data.vi << " "<<endl;
+    cout << "(" << i->data->id << ") " << i->data->en << " - " << i->data->vi << " "<<endl;
   }
   if (head == NULL)
   {
     cout << "Khong co phan tu";
   }
-}
-
-int main()
-{
-    Word w;
-    Dlist ds;
-    cout << "Nhap so luong tu: ";
-    int n;
-    cin >> n;
-    cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
-    for (int i = 0; i < n; i++) {
-        inputWord(w);
-        ds.addLast(w);
-    }
-    cout << "Danh sach tu dien:\n";
-    ds.display();
-    cout << "Nhap tu can tim: ";
-    string word;
-    getline(cin, word);
-    ds.search(word);
-     ds.display();
-      cout << "Nhap tu can tim: ";
-    string word2;
-    getline(cin, word2);
-    ds.search(word2);
-    return 0;
 }
