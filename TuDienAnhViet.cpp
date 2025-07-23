@@ -26,6 +26,11 @@ typedef struct node {
 
 typedef struct dlist {
     Node* head;
+    void display();
+} Dlist;
+
+int main()
+{
     Node* tail;
     int size;
     // khoi tao danhsach
@@ -35,11 +40,6 @@ typedef struct dlist {
     void addLast(Word &x);
     void search(string word);
     void remove(int p);
-    void display();
-} Dlist;
-
-int main()
-{
     Word w;
     Dlist ds;
     cout << "Nhap so luong tu: ";
