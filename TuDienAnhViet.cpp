@@ -36,6 +36,11 @@ typedef struct dlist {
     void search(string word);
     void remove(int p);
     void display();
+    // sua tu
+    // sort tu
+    // kiem tra tu dien rong
+    // xoa tu trung lap
+    
 } Dlist;
 
 dlist::dlist() {
