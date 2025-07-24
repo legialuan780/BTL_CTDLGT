@@ -28,19 +28,19 @@ typedef struct dlist {
     Node* head;
     Node* tail;
     int size;
-    // khoi tao danhsach
-     dlist();
-  // ham tao Node
+    dlist();
     Node *createNode(Word &x);
-    void addLast(Word &x);
+    void addWord(Word &x); // them rang buoc khi trung tu
     void search(string word);
-    void remove(int p);
     void display();
-    // sua tu
-    // sort tu
-    // kiem tra tu dien rong
-    // xoa tu trung lap
-    
+    void prevWord(Word &x);
+    void sizeDict();
+    void removeWord(string word);
+    void editWord(string word, Word &newWord);
+    void swap(Node *&a, Node *&b);
+    Node *partition(Node *&low, Node *&high);
+    void quickSort(Node *&low, Node *&high);
+
 } Dlist;
 
 dlist::dlist() {
@@ -57,7 +57,7 @@ Node *dlist::createNode(Word &x) {
 }
 
 
-void dlist::addLast(Word &x)
+void dlist::addWord(Word &x)
 {
    Node *a = createNode(x);
   if (a == NULL)
@@ -105,6 +105,31 @@ void dlist::search(string word)
   return;
 }
 
+void dlist::swap(Node *&a, Node *&b)
+{
+  Word temp = a->data;
+  a->data = b->data;
+  b->data = temp;
+}
+
+Node *dlist::partition(Node *&low, Node *&high)
+{
+  Word pivot = high->data;
+  Node *i = low->prev;
+
+  for (Node *j = low; j != high; j = j->next)
+  {
+    if (j->data.en < pivot.en)
+    {
+      i = (i == NULL) ? low : i->next;
+      swap(i, j);
+    }
+  }
+  i = (i == NULL) ? low : i->next;
+  swap(i, high);
+  return i;
+}
+
 void dlist::display()
 {
   for (Node *i = head; i != NULL; i = i->next)
@@ -127,7 +152,7 @@ int main()
     cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
     for (int i = 0; i < n; i++) {
         inputWord(w);
-        ds.addLast(w);
+        ds.addWord(w);
     }
     cout << "Danh sach tu dien:\n";
     ds.display();
@@ -136,7 +161,7 @@ int main()
     getline(cin, word);
     ds.search(word);
      ds.display();
-      cout << "Nhap tu can tim: ";
+    cout << "Nhap tu can tim: ";
     string word2;
     getline(cin, word2);
     ds.search(word2);
