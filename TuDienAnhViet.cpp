@@ -38,6 +38,7 @@ typedef struct dlist {
     void removeWord(string word);
     void editWord(string word, Word &newWord);
     void swap(Node *&a, Node *&b);
+    Node *getlastNode();
     Node *partition(Node *&low, Node *&high);
     void quickSort(Node *&low, Node *&high);
 
@@ -112,6 +113,17 @@ void dlist::swap(Node *&a, Node *&b)
   b->data = temp;
 }
 
+Node *dlist::getlastNode()
+{
+  Node *p = head;
+  while (head!=NULL && p->next != NULL)
+  {
+    p = p->next;
+  }
+  return p;
+}
+
+
 Node *dlist::partition(Node *&low, Node *&high)
 {
   Word pivot = high->data;
@@ -128,6 +140,22 @@ Node *dlist::partition(Node *&low, Node *&high)
   i = (i == NULL) ? low : i->next;
   swap(i, high);
   return i;
+}
+
+void dlist::quickSort(Node *&low, Node *&high)
+{
+   if (low != nullptr && high != nullptr 
+        && low != high && low != high->next) {
+      
+        // Find the partition node (pivot)
+        Node *pivot = partition(low, high);
+
+        // Recursively sort the left half
+        quickSort(low, pivot->prev);
+
+        // Recursively sort the right half
+        quickSort(pivot->next, high);
+    }
 }
 
 void dlist::display()
@@ -155,15 +183,17 @@ int main()
         ds.addWord(w);
     }
     cout << "Danh sach tu dien:\n";
+    Node *lastNode = ds.getlastNode();
+    ds.quickSort(ds.head, lastNode);
     ds.display();
-    cout << "Nhap tu can tim: ";
-    string word;
-    getline(cin, word);
-    ds.search(word);
-     ds.display();
-    cout << "Nhap tu can tim: ";
-    string word2;
-    getline(cin, word2);
-    ds.search(word2);
+    // cout << "Nhap tu can tim: ";
+    // string word;
+    // getline(cin, word);
+    // ds.search(word);
+    //  ds.display();
+    // cout << "Nhap tu can tim: ";
+    // string word2;
+    // getline(cin, word2);
+    // ds.search(word2);
     return 0;
 }
