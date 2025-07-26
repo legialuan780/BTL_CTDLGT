@@ -138,6 +138,53 @@ void dlist::swap(Node *&a, Node *&b)
   b->data = temp;
 }
 
+void dlist::removeFirstWord()
+{
+  if(head != NULL)
+  {
+    Node *a = head;
+    head = head->next;
+    head->prev = NULL;
+    delete a;
+    size--;
+  }
+  else
+  {
+    cout << "Danh sach rong, khong can xoa." << endl;
+  }
+}
+
+void dlist::removeLastWord()
+{
+ if(head==NULL)
+ {
+    cout << "Danh sach rong, khong can xoa." << endl;
+    return;
+ }
+  else if (head == tail)
+  {
+    delete head;
+    head = tail = NULL;
+    size = 0;
+    return;
+  }
+ else{
+    Node *temp = head;
+    
+    while(temp->next != tail)
+    {
+        temp = temp->next;
+    }
+
+    cout << "Tu ke cuoi: " << temp->data.en << endl;
+    tail = temp;
+    delete tail->next;
+    tail->next = NULL;
+    size--;
+}
+}
+
+
 Node *dlist::getlastNode()
 {
   Node *p = head;
@@ -244,7 +291,10 @@ int main()
   cout << "Danh sach tu dien:\n";
   Node *lastNode = ds.getlastNode();
   cout<<"lastNode: "<<lastNode->data.en<<endl;
-  ds.quickSort2(ds.head, lastNode);
+  // ds.quickSort2(ds.head, lastNode);
+  ds.display();
+  ds.removeFirstWord();
+  cout << "Danh sach sau khi xoa tu dau:\n";
   ds.display();
   // cout << "Nhap tu can sua: ";
   // string word;
