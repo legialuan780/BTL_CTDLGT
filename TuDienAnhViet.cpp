@@ -44,7 +44,9 @@ typedef struct dlist
   void swap(Node *&a, Node *&b);
   Node *getlastNode();
   Node *partition(Node *&low, Node *&high);
+  Node *partition2(Node *&low, Node *&high);
   void quickSort(Node *&low, Node *&high);
+  void quickSort2(Node *&low, Node *&high);
 
 } Dlist;
 
@@ -161,6 +163,25 @@ Node *dlist::partition(Node *&low, Node *&high)
   return i;
 }
 
+Node *dlist::partition2(Node *&low, Node *&high)
+{
+  Word pivot = high->data;
+  Node *i = low->prev;
+
+  for (Node *j = low; j != high; j = j->next)
+  {
+    if (j->data.en > pivot.en)
+    {
+      i = (i == NULL) ? low : i->next;
+      swap(i, j);
+    }
+  }
+  i = (i == NULL) ? low : i->next;
+  swap(i, high);
+  return i;
+}
+
+
 void dlist::quickSort(Node *&low, Node *&high)
 {
   if (low != nullptr && high != nullptr && low != high && low != high->next)
@@ -173,6 +194,22 @@ void dlist::quickSort(Node *&low, Node *&high)
     quickSort(pivot->next, high);
   }
 }
+
+
+void dlist::quickSort2(Node *&low, Node *&high)
+{
+  if (low != nullptr && high != nullptr && low != high && low != high->next)
+  {
+
+    Node *pivot = partition2(low, high);
+
+    quickSort2(low, pivot->prev);
+
+    quickSort2(pivot->next, high);
+  }
+}
+
+
 
 void dlist::display()
 {
@@ -193,6 +230,7 @@ int main()
   cout << "Nhap so luong tu: ";
   int n;
   cin >> n;
+ 
   cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
   for (int i = 0; i < n; i++)
   {
@@ -202,14 +240,15 @@ int main()
 
   cout << "Danh sach tu dien:\n";
   Node *lastNode = ds.getlastNode();
-  ds.quickSort(ds.head, lastNode);
+  cout<<"lastNode: "<<lastNode->data.en<<endl;
+  ds.quickSort2(ds.head, lastNode);
   ds.display();
-  cout << "Nhap tu can sua: ";
-  string word;
-  getline(cin, word);
-  Word newWord;
-  inputWord(newWord);
-  ds.editWord(word, newWord);
-  ds.display();
+  // cout << "Nhap tu can sua: ";
+  // string word;
+  // getline(cin, word);
+  // Word newWord;
+  // inputWord(newWord);
+  // ds.editWord(word, newWord);
+  // ds.display();
   return 0;
 }
