@@ -185,6 +185,36 @@ void dlist::removeLastWord()
   }
 }
 
+void dlist::removeWord(string word)
+{
+  Node *p = head;
+  while (p != NULL)
+  {
+    if (p->data.en == word)
+    {
+      if (p == head) // Neu node can xoa o dau danh sach
+      {
+        removeFirstWord();
+      }
+      else if (p == tail) // Neu node can xoa o cuoi danh sach
+      {
+        removeLastWord();
+      }
+      else // Neu node can xoa o giua danh sach
+      {
+        p->prev->next = p->next;
+        p->next->prev = p->prev;
+        delete p;
+        size--;
+      }
+      return;
+    }
+    p = p->next;
+  }
+  cout << "Khong tim thay tu de xoa" << endl;
+}
+
+
 Node *dlist::getlastNode()
 {
   Node *p = head;
@@ -289,8 +319,8 @@ int main()
   cout << "lastNode: " << lastNode->data.en << endl;
   // ds.quickSort2(ds.head, lastNode);
   ds.display();
-  ds.removeFirstWord();
-  cout << "Danh sach sau khi xoa tu dau:\n";
+  ds.removeWord("aple");
+  cout << "Danh sach sau khi xoa tu :\n";
   ds.display();
   // cout << "Nhap tu can sua: ";
   // string word;

@@ -1,0 +1,105 @@
+[33mcommit 4a738f2217cd9f9acea28ffbf3d53dfe653ea81a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Sun Jul 27 01:10:13 2025 +0700
+
+    format code
+
+[33mcommit 2a47881abfa6003b624c946d0d79b427a168cd92[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Sun Jul 27 01:08:48 2025 +0700
+
+    cai dat ham xoa dau va cuoi
+
+[33mcommit 2da79e37d7d5b7493ed199175b0c51c61feef8d2[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Sun Jul 27 00:33:36 2025 +0700
+
+    them ham removeWord va cac ham can thiet
+
+[33mcommit efc03c796a9c3c5754ae22f8d3022cea261e29f2[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Sun Jul 27 00:12:20 2025 +0700
+
+    them ham quicksort2
+
+[33mcommit 10614099c23d8654a444f6f273d586cd6987e242[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Sat Jul 26 13:04:41 2025 +0700
+
+    cai dat ham editWord
+
+[33mcommit 719b58362c4bfc15d105b2bbe56744c5253daf0d[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Fri Jul 25 01:27:24 2025 +0700
+
+    them mau ham sua xoa
+
+[33mcommit 7030e42376ebc057e6fcb76f2dd8c3af0e50c806[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Thu Jul 24 23:31:44 2025 +0700
+
+    cai dat quicksort
+
+[33mcommit ddb5184c7b5bbc452ea76d56ed1ba7e69c630e86[m
+Merge: a165965 c9ba8ee
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Thu Jul 24 22:20:01 2025 +0700
+
+    them mau ham quicksort
+
+[33mcommit a1659653e69c387b32934dc6c81fcdfbedc862c3[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Thu Jul 24 14:11:27 2025 +0700
+
+    luu thay doi truoc
+
+[33mcommit c9ba8eea10e13660c59c552f871c72f4039b8301[m
+Merge: 1f5d2e0 1fbcde2
+Author: Le Gia Luan <145912558+legialuan780@users.noreply.github.com>
+Date:   Wed Jul 23 08:06:07 2025 +0700
+
+    Merge pull request #1 from legialuan780/ngoctus
+    
+    ok
+
+[33mcommit 1fbcde22effc73ff378bf7455d543ae4f4edf479[m[33m ([m[1;31morigin/ngoctus[m[33m)[m
+Author: ngoctus <6551071092@st.utc2.edu.vn~>
+Date:   Wed Jul 23 07:48:46 2025 +0700
+
+    doi struct data -> struct* data o struct node
+
+[33mcommit 7942b6a711075ac2cb53a028dc69f87e22e40cf2[m
+Author: ngoctus <6551071092@st.utc2.edu.vn~>
+Date:   Tue Jul 22 10:16:02 2025 +0700
+
+    them con tro cho data o struct node
+
+[33mcommit 1f5d2e0c0ed7047eb0f55bef870b93226c5aaaa8[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Mon Jul 21 23:49:07 2025 +0700
+
+    chu thich cai tien search
+
+[33mcommit 7a02870870b7cb64ed3be1e7f07e9988c574b33e[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Mon Jul 21 23:44:59 2025 +0700
+
+    cai tien do phuc tap cua search
+
+[33mcommit aa3ed763fb12dd56a8c3861a7cecd4edc1fdcb94[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Mon Jul 21 23:28:07 2025 +0700
+
+    them search co ban
+
+[33mcommit a83950275c27fb4077a541807bb064e83e0dc8ce[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Mon Jul 21 20:06:00 2025 +0700
+
+    them tu dien
+
+[33mcommit b6946cdfea847d8c72de40a4a72ba29f41abdbb0[m
+Author: Le Gia Luan <legialuan780@gmail.com>
+Date:   Mon Jul 21 19:39:50 2025 +0700
+
+    modify struct
