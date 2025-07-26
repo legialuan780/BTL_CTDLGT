@@ -140,7 +140,7 @@ void dlist::swap(Node *&a, Node *&b)
 
 void dlist::removeFirstWord()
 {
-  if(head != NULL)
+  if (head != NULL)
   {
     Node *a = head;
     head = head->next;
@@ -156,11 +156,11 @@ void dlist::removeFirstWord()
 
 void dlist::removeLastWord()
 {
- if(head==NULL)
- {
+  if (head == NULL)
+  {
     cout << "Danh sach rong, khong can xoa." << endl;
     return;
- }
+  }
   else if (head == tail)
   {
     delete head;
@@ -168,12 +168,13 @@ void dlist::removeLastWord()
     size = 0;
     return;
   }
- else{
+  else
+  {
     Node *temp = head;
-    
-    while(temp->next != tail)
+
+    while (temp->next != tail)
     {
-        temp = temp->next;
+      temp = temp->next;
     }
 
     cout << "Tu ke cuoi: " << temp->data.en << endl;
@@ -181,9 +182,8 @@ void dlist::removeLastWord()
     delete tail->next;
     tail->next = NULL;
     size--;
+  }
 }
-}
-
 
 Node *dlist::getlastNode()
 {
@@ -231,7 +231,6 @@ Node *dlist::partition2(Node *&low, Node *&high)
   return i;
 }
 
-
 void dlist::quickSort(Node *&low, Node *&high)
 {
   if (low != nullptr && high != nullptr && low != high && low != high->next)
@@ -245,7 +244,6 @@ void dlist::quickSort(Node *&low, Node *&high)
   }
 }
 
-
 void dlist::quickSort2(Node *&low, Node *&high)
 {
   if (low != nullptr && high != nullptr && low != high && low != high->next)
@@ -258,8 +256,6 @@ void dlist::quickSort2(Node *&low, Node *&high)
     quickSort2(pivot->next, high);
   }
 }
-
-
 
 void dlist::display()
 {
@@ -280,7 +276,7 @@ int main()
   cout << "Nhap so luong tu: ";
   int n;
   cin >> n;
- 
+
   cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
   for (int i = 0; i < n; i++)
   {
@@ -290,7 +286,7 @@ int main()
 
   cout << "Danh sach tu dien:\n";
   Node *lastNode = ds.getlastNode();
-  cout<<"lastNode: "<<lastNode->data.en<<endl;
+  cout << "lastNode: " << lastNode->data.en << endl;
   // ds.quickSort2(ds.head, lastNode);
   ds.display();
   ds.removeFirstWord();
