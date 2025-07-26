@@ -39,7 +39,10 @@ typedef struct dlist
   void display();
   void prevWord(Word &x);
   void sizeDict();
+  void removeFirstWord();
+  void removeLastWord();
   void removeWord(string word);
+  void removeAllWords();
   void editWord(string word, Word &newWord);
   void swap(Node *&a, Node *&b);
   Node *getlastNode();
