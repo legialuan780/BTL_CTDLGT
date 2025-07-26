@@ -110,6 +110,22 @@ void dlist::search(string word)
   return;
 }
 
+void dlist::editWord(string word, Word &newWord)
+{
+  Node *p = head;
+  while (p != NULL)
+  {
+    if (p->data.en == word)
+    {
+      p->data = newWord; // Cap nhat tu moi
+      cout << "Da cap nhat tu: " << p->data.en << " - " << p->data.vi << endl;
+      return;
+    }
+    p = p->next;
+  }
+  cout << "Khong tim thay tu de cap nhat" << endl;
+}
+
 void dlist::swap(Node *&a, Node *&b)
 {
   Word temp = a->data;
@@ -188,14 +204,12 @@ int main()
   Node *lastNode = ds.getlastNode();
   ds.quickSort(ds.head, lastNode);
   ds.display();
-  cout << "Nhap tu can tim: ";
+  cout << "Nhap tu can sua: ";
   string word;
   getline(cin, word);
-  ds.search(word);
+  Word newWord;
+  inputWord(newWord);
+  ds.editWord(word, newWord);
   ds.display();
-  cout << "Nhap tu can tim: ";
-  string word2;
-  getline(cin, word2);
-  ds.search(word2);
   return 0;
 }
