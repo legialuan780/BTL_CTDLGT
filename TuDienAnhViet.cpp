@@ -299,6 +299,20 @@ void dlist::display()
   }
 }
 
+void menu()
+{
+  cout << "=====Chuong trinh tu dien Anh-Viet=====\n";
+  cout << "1. Them tu\n";
+  cout << "2. Tim tu\n";
+  cout << "3. Sua tu\n";
+  cout << "4. Xoa tu\n";
+  cout << "5. Hien thi danh sach tu dien\n";
+  cout << "6. Sap xep tu tang dan\n";
+  cout << "7. Sap xep tu giam dan\n";
+  cout << "8. Xem tu truoc\n";
+}
+
+
 int main()
 {
   Word w;
