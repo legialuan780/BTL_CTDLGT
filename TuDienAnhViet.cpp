@@ -8,7 +8,7 @@ typedef struct word
   int id;
 } Word;
 
-int currentID = 0;
+int increment = 0;
 
 void inputWord(Word &w)
 {
@@ -17,7 +17,7 @@ void inputWord(Word &w)
   getline(cin, w.en);
   cout << "Nhap nghia tieng Viet: ";
   getline(cin, w.vi);
-  w.id = ++currentID;
+  w.id = ++increment;
 }
 
 typedef struct node
