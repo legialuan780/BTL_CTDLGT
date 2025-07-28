@@ -69,7 +69,7 @@ Node *dlist::createNode(Word &x)
   return p;
 }
 
-void dlist::addWord(Word &x)
+void dlist::addLastWord(Word &x)
 {
   Node *a = createNode(x);
   if (a == NULL)
