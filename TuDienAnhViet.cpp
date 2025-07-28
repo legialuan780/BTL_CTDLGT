@@ -38,7 +38,7 @@ typedef struct dlist
   void search(string word);
   void display();
   void prevWord(Word &x);
-  void sizeDict();
+  int sizeDict();
   void removeFirstWord();
   void removeLastWord();
   void removeWord(string word);
@@ -214,6 +214,22 @@ void dlist::removeWord(string word)
   cout << "Khong tim thay tu de xoa" << endl;
 }
 
+void dlist::removeAllWords()
+{
+  Node *p = head;
+  while (p != NULL)
+  {
+    Node *temp = p;
+    p = p->next;
+    delete temp;
+  }
+  head = tail = NULL;
+  size = 0;
+}
+int dlist::sizeDict()
+{
+  return size;
+}
 
 Node *dlist::getlastNode()
 {
