@@ -34,7 +34,7 @@ typedef struct dlist
   int size;
   dlist();
   Node *createNode(Word &x);
-  void addWord(Word &x); // them rang buoc khi trung tu
+  void addLastWord(Word &x); // them rang buoc khi trung tu
   void search(string word);
   void display();
   void prevWord(Word &x);
@@ -50,6 +50,7 @@ typedef struct dlist
   Node *partition2(Node *&low, Node *&high);
   void quickSort(Node *&low, Node *&high);
   void quickSort2(Node *&low, Node *&high);
+  void insertionSort();
 
 } Dlist;
 
@@ -342,7 +343,7 @@ int main()
   for (int i = 0; i < n; i++)
   {
     inputWord(w);
-    ds.addWord(w);
+    ds.addLastWord(w);
   }
 
   cout << "Danh sach tu dien:\n";
