@@ -310,6 +310,7 @@ void menu()
   cout << "6. Sap xep tu tang dan\n";
   cout << "7. Sap xep tu giam dan\n";
   cout << "8. Xem tu truoc\n";
+  cout << "0. Thoat\n";
 }
 
 
