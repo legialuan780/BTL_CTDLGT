@@ -307,12 +307,12 @@ void dlist::quickSort2(Node *&low, Node *&high)
 void dlist::sortedInsert(Word &x)
 {
   Node *newNode = createNode(x);
-  if(head == NULL)
+  if (head == NULL)
   {
     head = tail = newNode;
     size++;
   }
-  if(x.en <= head->data.en)
+  if (x.en <= head->data.en)
   {
     newNode->next = head;
     head->prev = newNode;
@@ -321,20 +321,19 @@ void dlist::sortedInsert(Word &x)
   }
   // traverse the list to find the correct position
   Node *curr = head;
-  while(curr->next != NULL &&  curr->next->data.en < x.en)
+  while (curr->next != NULL && curr->next->data.en < x.en)
   {
     curr = curr->next;
   }
-  // insert the new node 
+  // insert the new node
   newNode->next = curr->next;
-  if(curr->next != NULL)
+  if (curr->next != NULL)
   {
     curr->next->prev = newNode;
   }
   curr->next = newNode;
   newNode->prev = curr;
 }
-
 
 void dlist::display()
 {
@@ -361,7 +360,6 @@ void menu()
   cout << "8. Xem tu truoc\n";
   cout << "0. Thoat\n";
 }
-
 
 int main()
 {
