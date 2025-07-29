@@ -91,6 +91,30 @@ void dlist::addLastWord(Word &x)
   }
 }
 
+void dlist::prevWord(Word &x)
+{
+  cout << "Nhap tu tieng Anh: ";
+  getline(cin, x.en);
+  Node *a = head;
+  while (a != NULL)
+  {
+    if (a->data.en == x.en)
+    {
+      if (a->prev != NULL)
+      {
+        cout << "Tu truoc: " << a->prev->data.en << endl;
+      }
+      else
+      {
+        cout << "Khong co tu truoc" << endl;
+      }
+      return;
+    }
+    a = a->next;
+  }
+  cout << "Khong tim thay tu" << endl;
+}
+
 void dlist::search(string word)
 {
   Node *p = head;
@@ -414,12 +438,14 @@ int main()
   Node *lastNode = ds.getlastNode();
   cout << "lastNode: " << lastNode->data.en << endl;
   // ds.quickSort(ds.head, lastNode);
+  cout<<"Nhap tu de tim tu truoc: "<<endl;
   // inputWord(w);
   // ds.sortedInsert(w);
   cout << "Danh sach sau khi them tu moi:\n";
   ds.display();
-  ds.removeDuplicate();
-  cout << "Danh sach sau khi xoa tu trung lap :\n";
+  // ds.removeDuplicate();
+  // cout << "Danh sach sau khi xoa tu trung lap :\n";
+  ds.prevWord(w);
   ds.display();
   // cout << "Nhap tu can sua: ";
   // string word;
