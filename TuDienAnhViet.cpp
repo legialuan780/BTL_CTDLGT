@@ -43,6 +43,7 @@ typedef struct dlist
   void removeLastWord();
   void removeWord(string word);
   void removeAllWords();
+  void removeDuplicate();
   void editWord(string word, Word &newWord);
   void swap(Node *&a, Node *&b);
   Node *getlastNode();
@@ -227,6 +228,31 @@ void dlist::removeAllWords()
   head = tail = NULL;
   size = 0;
 }
+
+void dlist::removeDuplicate()
+{
+  Node *current = head;
+  while (current != NULL)
+  {
+    Node *temp = current;
+    while (temp->next != NULL)
+    {
+      if (temp->next->data.en == current->data.en)
+      {
+        Node *duplicate = temp->next;
+        temp->next = temp->next->next;
+        delete duplicate;
+        size--;
+      }
+      else
+      {
+        temp = temp->next;
+      }
+    }
+    current = current->next;
+  }
+}
+
 int dlist::sizeDict()
 {
   return size;
@@ -387,13 +413,13 @@ int main()
   cout << "Danh sach tu dien:\n";
   Node *lastNode = ds.getlastNode();
   cout << "lastNode: " << lastNode->data.en << endl;
-  ds.quickSort(ds.head, lastNode);
-  inputWord(w);
-  ds.sortedInsert(w);
+  // ds.quickSort(ds.head, lastNode);
+  // inputWord(w);
+  // ds.sortedInsert(w);
   cout << "Danh sach sau khi them tu moi:\n";
   ds.display();
-  ds.removeWord("aple");
-  cout << "Danh sach sau khi xoa tu :\n";
+  ds.removeDuplicate();
+  cout << "Danh sach sau khi xoa tu trung lap :\n";
   ds.display();
   // cout << "Nhap tu can sua: ";
   // string word;
