@@ -438,7 +438,7 @@ int main()
   Node *lastNode = ds.getlastNode();
   cout << "lastNode: " << lastNode->data.en << endl;
   // ds.quickSort(ds.head, lastNode);
-  cout<<"Nhap tu de tim tu truoc: "<<endl;
+  cout << "Nhap tu de tim tu truoc: " << endl;
   // inputWord(w);
   // ds.sortedInsert(w);
   cout << "Danh sach sau khi them tu moi:\n";
