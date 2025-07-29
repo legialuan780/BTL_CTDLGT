@@ -50,8 +50,8 @@ typedef struct dlist
   Node *partition2(Node *&low, Node *&high);
   void quickSort(Node *&low, Node *&high);
   void quickSort2(Node *&low, Node *&high);
-  void insertionSort();
-
+  // insert value in sorted order
+  void sortedInsert(Word &x);
 } Dlist;
 
 dlist::dlist()
@@ -304,6 +304,38 @@ void dlist::quickSort2(Node *&low, Node *&high)
   }
 }
 
+void dlist::sortedInsert(Word &x)
+{
+  Node *newNode = createNode(x);
+  if(head == NULL)
+  {
+    head = tail = newNode;
+    size++;
+  }
+  if(x.en <= head->data.en)
+  {
+    newNode->next = head;
+    head->prev = newNode;
+    head = newNode;
+    size++;
+  }
+  // traverse the list to find the correct position
+  Node *curr = head;
+  while(curr->next != NULL &&  curr->next->data.en < x.en)
+  {
+    curr = curr->next;
+  }
+  // insert the new node 
+  newNode->next = curr->next;
+  if(curr->next != NULL)
+  {
+    curr->next->prev = newNode;
+  }
+  curr->next = newNode;
+  newNode->prev = curr;
+}
+
+
 void dlist::display()
 {
   for (Node *i = head; i != NULL; i = i->next)
@@ -349,7 +381,10 @@ int main()
   cout << "Danh sach tu dien:\n";
   Node *lastNode = ds.getlastNode();
   cout << "lastNode: " << lastNode->data.en << endl;
-  // ds.quickSort2(ds.head, lastNode);
+  ds.quickSort(ds.head, lastNode);
+  inputWord(w);
+  ds.sortedInsert(w);
+  cout << "Danh sach sau khi them tu moi:\n";
   ds.display();
   ds.removeWord("aple");
   cout << "Danh sach sau khi xoa tu :\n";
