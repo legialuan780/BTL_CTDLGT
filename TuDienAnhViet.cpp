@@ -339,22 +339,20 @@ void dlist::display()
 {
   for (Node *i = head; i != NULL; i = i->next)
   {
-        if(i->data.vi.empty())
+    if (i->data.vi.empty())
     {
       cout << "(" << i->data.id << ") " << i->data.en << " - " << "NULL" << " " << endl;
     }
-    else{
+    else
+    {
 
-    
-    cout << "(" << i->data.id << ") " << i->data.en << " - " << i->data.vi << " " << endl;
+      cout << "(" << i->data.id << ") " << i->data.en << " - " << i->data.vi << " " << endl;
     }
-
   }
   if (head == NULL)
   {
     cout << "Khong co phan tu";
   }
-  
 }
 
 void menu()
