@@ -53,7 +53,8 @@ typedef struct dlist
   void quickSort(Node *&low, Node *&high);
   void quickSort2(Node *&low, Node *&high);
   void sortedInsert(Word &x);
-  void readFromFile(const string &filename);
+  void readFromFile(const string &filename);\
+  void saveToFile(const string &filename);
 } Dlist;
 
 dlist::dlist()
@@ -432,6 +433,24 @@ void dlist::readFromFile(const string &filename) {
 }
 
 
+void dlist::saveToFile(const string &filename) {
+    ofstream file(filename);
+    if (!file.is_open()) {
+        cout << "Khong mo duoc file de ghi." << endl;
+        return;
+    }
+
+    Node *current = head;
+    while (current != nullptr) {
+        file << current->data.en << "|" << current->data.vi << endl;
+        current = current->next;
+    }
+
+    file.close();
+    cout << "Da luu thao tac vao file " << filename << endl;
+}
+
+
 void menu()
 {
   cout << "=====Chuong trinh tu dien Anh-Viet=====\n";
@@ -461,11 +480,12 @@ int main()
   //   ds.addLastWord(w);
   // }
   ds.readFromFile("data.txt");
-
+  
   cout << "Danh sach tu dien:\n";
   Node *lastNode = ds.getlastNode();
   cout << "lastNode: " << lastNode->data.en << endl;
   ds.quickSort(ds.head, lastNode);
+  ds.saveToFile("data2.txt");
   cout << "Nhap tu de tim tu truoc: " << endl;
   // inputWord(w);
   // ds.sortedInsert(w);
