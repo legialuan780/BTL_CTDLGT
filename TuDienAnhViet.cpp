@@ -398,7 +398,7 @@ void dlist::display()
     else
     {
 
-      cout << "(" << i->data.id << ") " << i->data.en << " - " << i->data.vi << " " << endl;
+      cout << "(" << i->data.id << ") " << "\t" << i->data.en << " - " << i->data.vi << " " << endl;
     }
   }
   if (head == NULL)
