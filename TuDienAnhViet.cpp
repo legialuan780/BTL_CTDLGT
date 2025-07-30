@@ -2,6 +2,8 @@
 using namespace std;
 #include <fstream>
 #include <sstream>
+#include <ctime>
+#include <cstdlib>
 typedef struct word
 {
   string en;
@@ -53,8 +55,9 @@ typedef struct dlist
   void quickSort(Node *&low, Node *&high);
   void quickSort2(Node *&low, Node *&high);
   void sortedInsert(Word &x);
-  void readFromFile(const string &filename);\
+  void readFromFile(const string &filename);
   void saveToFile(const string &filename);
+  void wordGame();
 } Dlist;
 
 dlist::dlist()
@@ -450,19 +453,45 @@ void dlist::saveToFile(const string &filename) {
     cout << "Da luu thao tac vao file " << filename << endl;
 }
 
+void dlist::wordGame() {
+  
+    if(head == NULL)
+    {
+      cout << "Danh sach tu dien rong, khong the choi game." << endl;
+      return;
+    }
+
+     srand(time(0)); // Khởi tạo seed cho random
+
+    int score = 0;
+    int questions = 5; // số câu hỏi
+
+    for (int i = 0; i < questions; ++i) {
+        // Chọn ngẫu nhiên 1 từ
+        int index = rand() % sizeDict();
+        Node *current = head;
+        for (int j = 0; j < index; ++j) {
+            current = current->next;
+        }
+
+        string userAnswer;
+        cout << "Tu tieng Anh: " << current->data.en << "\nNghia tieng Viet la gi? ";
+        getline(cin, userAnswer);
+
+        if (userAnswer == current->data.vi) {
+            cout << "Dung!\n";
+            score++;
+        } else {
+            cout << "Sai. Dap an dung la: " << current->data.vi << "\n";
+        }
+    }
+
+    cout << "\nDiem cua ban: " << score << "/" << questions << endl;
+}
 
 void menu()
 {
   cout << "=====Chuong trinh tu dien Anh-Viet=====\n";
-  cout << "1. Them tu\n";
-  cout << "2. Tim tu\n";
-  cout << "3. Sua tu\n";
-  cout << "4. Xoa tu\n";
-  cout << "5. Hien thi danh sach tu dien\n";
-  cout << "6. Sap xep tu tang dan\n";
-  cout << "7. Sap xep tu giam dan\n";
-  cout << "8. Xem tu truoc\n";
-  cout << "0. Thoat\n";
 }
 
 int main()
@@ -491,6 +520,7 @@ int main()
   // ds.sortedInsert(w);
   cout << "Danh sach sau khi them tu moi:\n";
   ds.display();
+  ds.wordGame();
   // ds.removeAllWords();
   // cout << "Danh sach sau khi xoa  :\n";
   // ds.prevWord(w);
