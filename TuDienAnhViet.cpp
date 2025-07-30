@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
-
+#include <fstream>
+#include <sstream>
 typedef struct word
 {
   string en;
@@ -51,8 +52,8 @@ typedef struct dlist
   Node *partition2(Node *&low, Node *&high);
   void quickSort(Node *&low, Node *&high);
   void quickSort2(Node *&low, Node *&high);
-  // insert value in sorted order
   void sortedInsert(Word &x);
+  void readFromFile(const string &filename);
 } Dlist;
 
 dlist::dlist()
@@ -393,6 +394,7 @@ void dlist::display()
     {
       cout << "(" << i->data.id << ") " << i->data.en << " - " << "NULL" << " " << endl;
     }
+  
     else
     {
 
@@ -401,9 +403,34 @@ void dlist::display()
   }
   if (head == NULL)
   {
-    cout << "Khong co phan tu";
+    cout << "Danh sach hien dang rong";
   }
 }
+
+void dlist::readFromFile(const string &filename) {
+    ifstream file(filename);
+    if (!file.is_open()) {
+        cout << "Khong mo duoc file." << endl;
+        return;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string en, vi;
+
+        if (getline(ss, en, '|') && getline(ss, vi)) {
+            Word w;
+            w.en = en;
+            w.vi = vi;
+            w.id = ++increment;
+            addLastWord(w);
+        }
+    }
+
+    file.close();
+}
+
 
 void menu()
 {
@@ -423,31 +450,32 @@ int main()
 {
   Word w;
   Dlist ds;
-  cout << "Nhap so luong tu: ";
-  int n;
-  cin >> n;
+  // cout << "Nhap so luong tu: ";
+  // int n;
+  // cin >> n;
 
-  cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
-  for (int i = 0; i < n; i++)
-  {
-    inputWord(w);
-    ds.addLastWord(w);
-  }
+  // cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
+  // for (int i = 0; i < n; i++)
+  // {
+  //   inputWord(w);
+  //   ds.addLastWord(w);
+  // }
+  ds.readFromFile("data.txt");
 
   cout << "Danh sach tu dien:\n";
   Node *lastNode = ds.getlastNode();
   cout << "lastNode: " << lastNode->data.en << endl;
-  // ds.quickSort(ds.head, lastNode);
+  ds.quickSort(ds.head, lastNode);
   cout << "Nhap tu de tim tu truoc: " << endl;
   // inputWord(w);
   // ds.sortedInsert(w);
   cout << "Danh sach sau khi them tu moi:\n";
   ds.display();
-  // ds.removeDuplicate();
-  // cout << "Danh sach sau khi xoa tu trung lap :\n";
-  ds.prevWord(w);
-  ds.display();
-  // cout << "Nhap tu can sua: ";
+  // ds.removeAllWords();
+  // cout << "Danh sach sau khi xoa  :\n";
+  // ds.prevWord(w);
+  // ds.display();
+  // // cout << "Nhap tu can sua: ";
   // string word;
   // getline(cin, word);
   // Word newWord;
