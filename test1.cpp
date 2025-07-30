@@ -510,39 +510,18 @@ int main()
 {
   Word w;
   Dlist ds;
-  // cout << "Nhap so luong tu: ";
-  // int n;
-  // cin >> n;
+  int choice;
+  while(choice!=0)
+  {
 
-  // cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
-  // for (int i = 0; i < n; i++)
-  // {
-  //   inputWord(w);
-  //   ds.addLastWord(w);
-  // }
-  ds.readFromFile("data.txt");
 
-  cout << "Danh sach tu dien:\n";
-  Node *lastNode = ds.getlastNode();
-  cout << "lastNode: " << lastNode->data.en << endl;
-  ds.quickSort(ds.head, lastNode);
-  ds.saveToFile("data2.txt");
-  cout << "Nhap tu de tim tu truoc: " << endl;
-  // inputWord(w);
-  // ds.sortedInsert(w);
-  cout << "Danh sach sau khi them tu moi:\n";
-  ds.display();
-  ds.wordGame();
-  // ds.removeAllWords();
-  // cout << "Danh sach sau khi xoa  :\n";
-  // ds.prevWord(w);
-  // ds.display();
-  // // cout << "Nhap tu can sua: ";
-  // string word;
-  // getline(cin, word);
-  // Word newWord;
-  // inputWord(newWord);
-  // ds.editWord(word, newWord);
-  // ds.display();
+
+
+
+
+
+
+
+  }
   return 0;
 }
