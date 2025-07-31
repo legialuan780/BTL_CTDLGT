@@ -63,7 +63,6 @@ typedef struct dlist
   void readFromFile(const string &filename);
   void saveToFile(const string &filename);
   void wordGame();
-  void wordGame2();
 } Dlist;
 
 dlist::dlist()
@@ -113,7 +112,7 @@ void dlist::prevWord(Word &x)
     {
       if (a->prev != NULL)
       {
-        cout << "Tu truoc: " << a->prev->data.en << endl;
+        cout << "Tu truoc cua: " << x.en << "la: " << a->prev->data.id << " " << a->prev->data.en << endl;
       }
       else
       {
@@ -465,51 +464,46 @@ void dlist::saveToFile(const string &filename)
   cout << "Da luu thao tac vao file " << filename << endl;
 }
 
-void dlist::wordGame()
-{
-
-  if (head == NULL)
-  {
-    cout << "Danh sach tu dien rong, khong the choi game." << endl;
-    return;
-  }
-
-  srand(time(0)); // Khởi tạo seed cho random
-
-  int score = 0;
-  int questions = 5; // số câu hỏi
-
-  for (int i = 0; i < questions; ++i)
-  {
-    // Chọn ngẫu nhiên 1 từ
-    int index = rand() % sizeDict();
-    Node *current = head;
-    for (int j = 0; j < index; ++j)
-    {
-      current = current->next;
-    }
-
-    string userAnswer;
-    cout << "Tu tieng Anh: " << current->data.en << "\nNghia tieng Viet la gi? ";
-    getline(cin, userAnswer);
-
-    if (userAnswer == current->data.vi)
-    {
-      cout << "Dung!\n";
-      score++;
-    }
-    else
-    {
-      cout << "Sai. Dap an dung la: " << current->data.vi << "\n";
-    }
-  }
-
-  cout << "\nDiem cua ban: " << score << "/" << questions << endl;
-}
-
 void menu()
 {
-  cout << "=====Chuong trinh tu dien Anh-Viet=====\n";
+  cout << "=====Chuong trinh tu dien Anh-Viet=====" << endl;
+  cout << "***Them tu dien***" << endl;
+  cout << "1. Nhap bo tu dien co san" << endl;
+  cout << "2. Nhap thu cong" << endl;
+  cout << "3. Hien thi tu dien" << endl;
+  cout << "***Cac thao tac voi bo tu dien ap dung Linked List***" << endl;
+  cout << "4. Tim tu bat ky" << endl;
+  cout << "5. Sua tu bat ky" << endl;
+  cout << "6. Xoa tu dau tien" << endl;
+  cout << "7. Xoa tu cuoi cung" << endl;
+  cout << "8. Xoa tu bat ky" << endl;
+  cout << "9. Xoa tat ca tu trung lap" << endl;
+  cout << "10. Xoa toan bo tu dien" << endl;
+  cout << "***Ap dung thuat toan Quick Sort va Insertion Sort***" << endl;
+  cout << "11. Sap xep tu tang dan theo bang chu cai" << endl;
+  cout << "12. Sap xep tu giam dan theo bang chu cai" << endl;
+  cout << "13. Them tu moi vao bo tu dien voi dung thu tu" << endl;
+  cout << "14. Tro choi on tap tu vung" << endl;
+  cout << "0. Thoat chuong trinh" << endl;
+}
+
+void menu2()
+{
+  cout << "1. Nhap bo tu dien co san" << endl;
+  cout << "2. Nhap thu cong" << endl;
+  cout << "3. Hien thi tu dien" << endl;
+  cout << "4. Tim tu bat ky" << endl;
+  cout << "5. Sua tu bat ky" << endl;
+  cout << "6. Xoa tu dau tien" << endl;
+  cout << "7. Xoa tu cuoi cung" << endl;
+  cout << "8. Xoa tu bat ky" << endl;
+  cout << "9. Xoa tat ca tu trung lap" << endl;
+  cout << "10. Xoa toan bo tu dien" << endl;
+  cout << "11. Sap xep tu tang dan theo bang chu cai" << endl;
+  cout << "12. Sap xep tu giam dan theo bang chu cai" << endl;
+  cout << "13. Them tu moi vao bo tu dien voi dung thu tu" << endl;
+  cout << "14. Tro choi on tap tu vung" << endl;
+  cout << "0. Thoat chuong trinh" << endl;
 }
 
 typedef struct user
@@ -726,7 +720,7 @@ void user::loginMenu()
 
   while (1)
   {
-    printf("=== HE THONG DANG NHAP UNG DUNG TU DIEN ===\n");
+    printf("=== DANG NHAP UNG DUNG TU DIEN ===\n");
     printf("1. Dang ky tai khoan moi\n");
     printf("2. Dang nhap\n");
     printf("0. Thoat chuong trinh.\n");
@@ -762,7 +756,7 @@ void user::loginMenu()
   }
 }
 
-void dlist::wordGame2()
+void dlist::wordGame()
 {
   if (head == NULL)
   {
@@ -856,10 +850,26 @@ void dlist::wordGame2()
     cout << "Nhap lua chon (A/B/C/D): ";
     cin >> userChoice;
 
-    // Chuyển về chữ hoa nếu là chữ thường
-    if (userChoice >= 'a' && userChoice <= 'd')
+    // Lặp cho đến khi nhận được đáp án hợp lệ
+    bool validChoice = false;
+    while (!validChoice)
     {
-      userChoice = userChoice - 'a' + 'A';
+      // Chuyển về chữ hoa nếu là chữ thường
+      if (userChoice >= 'a' && userChoice <= 'd')
+      {
+        userChoice = userChoice - 'a' + 'A';
+      }
+
+      // Check if input is valid
+      if (userChoice >= 'A' && userChoice <= 'D')
+      {
+        validChoice = true;
+      }
+      else
+      {
+        cout << "Lua chon khong hop le! Vui long nhap lai (A/B/C/D): ";
+        cin >> userChoice;
+      }
     }
 
     // Kiểm tra đáp án
@@ -896,45 +906,188 @@ void dlist::wordGame2()
   }
 }
 
+void runProgram()
+{
+  menu();
+  Word w;
+  Dlist ds;
+  int choice1 = -1;
+  string findWord;
+  string editWord;
+  string removeWord;
+  Word newWord;
+  Word sortedWord;
+  Node *lastNode = ds.getlastNode();
+  while (choice1 != 0)
+  {
+    menu2();
+    cout << endl
+         << "Moi nhap lua chon: " << endl;
+    cin >> choice1;
+    cin.ignore();
+    switch (choice1)
+    {
+    case 1:
+      ds.readFromFile("data.txt");
+      ds.saveToFile("data2.txt");
+      cout << endl
+           << "---Nhap file thanh cong---";
+      cout << endl
+           << "So luong tu hien tai: " << ds.sizeDict();
+      break;
+    case 2:
+      cout << endl
+           << "---Moi ban nhap tu dien---" << endl;
+      inputWord(w);
+      ds.addLastWord(w);
+      ds.saveToFile("data2.txt");
+      cout << endl
+           << "So luong tu hien tai: " << ds.sizeDict();
+      break;
+    case 3:
+      ds.display();
+      cout << endl
+           << "So luong tu hien tai: " << ds.sizeDict();
+      break;
+    case 4:
+      cout << endl
+           << "---Nhap tu can tim: " << endl;
+      getline(cin, findWord);
+      ds.search(findWord);
+      break;
+    case 5:
+      cout << endl
+           << "---Nhap tu can sua: " << endl;
+
+      getline(cin, editWord);
+      ds.search(editWord);
+
+      cout << endl
+           << "---Nhap tu moi--" << endl;
+      inputWord(newWord);
+      ds.editWord(editWord, newWord);
+      ds.saveToFile("data2.txt");
+      break;
+    case 6:
+      ds.removeFirstWord();
+      cout << endl
+           << "Da xoa tu dau tien";
+      ds.saveToFile("data2.txt");
+      cout << endl
+           << "So luong tu hien tai: " << ds.sizeDict();
+      break;
+    case 7:
+      ds.removeLastWord();
+      cout << endl
+           << "Da xoa tu cuoi cung";
+      ds.saveToFile("data2.txt");
+      cout << endl
+           << "So luong tu hien tai: " << ds.sizeDict();
+      break;
+    case 8:
+      ds.removeWord(removeWord);
+      cout << endl
+           << "Da xoa tu " << removeWord;
+      ds.saveToFile("data2.txt");
+      cout << endl
+           << "So luong tu hien tai: " << ds.sizeDict();
+      break;
+    case 9:
+      ds.removeDuplicate();
+      cout << endl
+           << "Da xoa tat ca tu trung lap";
+      ds.saveToFile("data2.txt");
+      cout << endl
+           << "So luong tu hien tai: " << ds.sizeDict();
+      break;
+    case 10:
+      ds.removeAllWords();
+      cout << endl
+           << "Da xoa toan bo tu dien";
+      ds.saveToFile("data2.txt");
+      cout << endl
+           << "So luong tu hien tai: " << ds.sizeDict();
+      break;
+    case 11:
+      ds.quickSort(ds.head, lastNode);
+      cout << endl
+           << "Tu dien da duoc sap xep tang dan";
+      ds.saveToFile("data2.txt");
+      break;
+    case 12:
+      ds.quickSort2(ds.head, lastNode);
+      cout << endl
+           << "Tu dien da duoc sap xep giam dan";
+      ds.saveToFile("data2.txt");
+      break;
+    case 13:
+      cout << endl
+           << "---Nhap tu moi---" << endl;
+      inputWord(sortedWord);
+      ds.sortedInsert(sortedWord);
+      ds.saveToFile("data2.txt");
+      cout << endl
+           << "Da them tu voi thu tu dung";
+      ds.prevWord(sortedWord);
+      cout << "Tu da them: " << sortedWord.id << " " << sortedWord.en << " " << sortedWord.vi;
+      cout << endl
+           << "So luong tu hien tai: " << ds.sizeDict();
+      break;
+    case 14:
+      ds.wordGame();
+    case 0:
+      choice1 = 0;
+      cout << "Da thoat chuong trinh";
+      break;
+    }
+  }
+}
+
 int main()
 {
   User s;
   s.loginMenu();
-  Word w;
-  Dlist ds;
-  // cout << "Nhap so luong tu: ";
-  // int n;
-  // cin >> n;
+  runProgram();
+  //   User s;
+  //   s.loginMenu();
+  //   Word w;
+  //   Dlist ds;
+  //   // cout << "Nhap so luong tu: ";
+  //   // int n;
+  //   // cin >> n;
 
-  // cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
-  // for (int i = 0; i < n; i++)
-  // {
-  //   inputWord(w);
-  //   ds.addLastWord(w);
-  // }
-  ds.readFromFile("data.txt");
+  //   // cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
+  //   // for (int i = 0; i < n; i++)
+  //   // {
+  //   //   inputWord(w);
+  //   //   ds.addLastWord(w);
+  //   // }
+  //   ds.readFromFile("data.txt");
+  //   cout << "Danh sach tu dien:\n";
+  //   Node *lastNode = ds.getlastNode();
+  //   cout << "lastNode: " << lastNode->data.en << endl;
+  //   ds.quickSort(ds.head, lastNode);
+  //      inputWord(w);
+  //     ds.addLastWord(w);
 
-  cout << "Danh sach tu dien:\n";
-  Node *lastNode = ds.getlastNode();
-  cout << "lastNode: " << lastNode->data.en << endl;
-  ds.quickSort(ds.head, lastNode);
-  ds.saveToFile("data2.txt");
-  cout << "Nhap tu de tim tu truoc: " << endl;
-  // inputWord(w);
-  // ds.sortedInsert(w);
-  cout << "Danh sach sau khi them tu moi:\n";
-  ds.display();
-  ds.wordGame2();
-  // ds.removeAllWords();
-  // cout << "Danh sach sau khi xoa  :\n";
-  // ds.prevWord(w);
-  // ds.display();
-  // // cout << "Nhap tu can sua: ";
-  // string word;
-  // getline(cin, word);
-  // Word newWord;
-  // inputWord(newWord);
-  // ds.editWord(word, newWord);
-  // ds.display();
+  //  ds.saveToFile("data2.txt");
+  //   cout << "Nhap tu de tim tu truoc: " << endl;
+  //   // inputWord(w);
+  //   // ds.sortedInsert(w);
+  //   cout << "Danh sach sau khi them tu moi:\n";
+  //   ds.display();
+  //   // ds.wordGame2();
+  //   // ds.removeAllWords();
+  //   // cout << "Danh sach sau khi xoa  :\n";
+  //   // ds.prevWord(w);
+  //   // ds.display();
+  //   // // cout << "Nhap tu can sua: ";
+  //   // string word;
+  //   // getline(cin, word);
+  //   // Word newWord;
+  //   // inputWord(newWord);
+  //   // ds.editWord(word, newWord);
+  //   // ds.display();
+
   return 0;
 }
