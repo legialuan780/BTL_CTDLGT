@@ -4,7 +4,7 @@ using namespace std;
 #include <sstream>
 #include <ctime>
 #include <cstdlib>
-
+#include <vector>
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
@@ -63,6 +63,7 @@ typedef struct dlist
   void readFromFile(const string &filename);
   void saveToFile(const string &filename);
   void wordGame();
+  void wordGame2();
 } Dlist;
 
 dlist::dlist()
@@ -718,42 +719,181 @@ int user::login()
   return 0;
 }
 
-//Them ham menu dang nhap
-void user::loginMenu(){
-    int choice;
-    
-    while (1) {
-        printf("=== HE THONG DANG NHAP UNG DUNG TU DIEN ===\n");
-        printf("1. Dang ky tai khoan moi\n");
-        printf("2. Dang nhap\n");
-        printf("0. Thoat chuong trinh.\n");
-        printf("Nhap lua chon: ");
-        scanf("%d", &choice);
-        
-        switch (choice){
-            case 1:
-                reg();
-                // Sau khi dang ky, quay lai menu
-                printf("\nNhan Enter de tiep tuc...\n");
-                getchar(); // doc ky tu newline con lai
-                getchar(); // cho nguoi dung nhan Enter
-                break;
-            case 2:
-                if (login()){
-                    return; // Dang nhap thanh cong, thoat khoi menu
-                }
-                else{
-                    exit(1); // Het so lan thu, thoat chuong trinh
-                }
-                break;
-            case 0:
-            	printf("Dang thoat chuong trinh...\n");
-            	exit(1);
-            default:
-                printf("Lua chon khong hop le!\n\n");
-                break;
-        }
+// Them ham menu dang nhap
+void user::loginMenu()
+{
+  int choice;
+
+  while (1)
+  {
+    printf("=== HE THONG DANG NHAP UNG DUNG TU DIEN ===\n");
+    printf("1. Dang ky tai khoan moi\n");
+    printf("2. Dang nhap\n");
+    printf("0. Thoat chuong trinh.\n");
+    printf("Nhap lua chon: ");
+    scanf("%d", &choice);
+
+    switch (choice)
+    {
+    case 1:
+      reg();
+      // Sau khi dang ky, quay lai menu
+      printf("\nNhan Enter de tiep tuc...\n");
+      getchar(); // doc ky tu newline con lai
+      getchar(); // cho nguoi dung nhan Enter
+      break;
+    case 2:
+      if (login())
+      {
+        return; // Dang nhap thanh cong, thoat khoi menu
+      }
+      else
+      {
+        exit(1); // Het so lan thu, thoat chuong trinh
+      }
+      break;
+    case 0:
+      printf("Dang thoat chuong trinh...\n");
+      exit(1);
+    default:
+      printf("Lua chon khong hop le!\n\n");
+      break;
     }
+  }
+}
+
+void dlist::wordGame2()
+{
+  if (head == NULL)
+  {
+    cout << "Danh sach tu dien rong, khong the choi game." << endl;
+    return;
+  }
+
+  if (sizeDict() < 4)
+  {
+    cout << "Tu dien can it nhat 4 tu de choi game trac nghiem." << endl;
+    return;
+  }
+
+  srand(time(0)); // Khởi tạo seed cho random
+
+  int score = 0;
+  int questions = 5; // số câu hỏi
+
+  for (int i = 0; i < questions; ++i)
+  {
+    cout << "\n=== Cau hoi " << (i + 1) << "/" << questions << " ===" << endl;
+
+    // Chọn ngẫu nhiên 1 từ làm đáp án đúng
+    int correctIndex = rand() % sizeDict();
+    Node *correctNode = head;
+    for (int j = 0; j < correctIndex; ++j)
+    {
+      correctNode = correctNode->next;
+    }
+
+    cout << "Tu tieng Anh: " << correctNode->data.en << endl;
+    cout << "Chon nghia dung:" << endl;
+
+    // Tạo mảng lưu 4 đáp án
+    string answers[4];
+    int correctPos = rand() % 4; // Vị trí của đáp án đúng (0-3)
+
+    // Đặt đáp án đúng vào vị trí ngẫu nhiên
+    answers[correctPos] = correctNode->data.vi;
+
+    // Tạo 3 đáp án sai
+    vector<string> wrongAnswers;
+    Node *temp = head;
+    while (temp != NULL && wrongAnswers.size() < 3)
+    {
+      if (temp->data.vi != correctNode->data.vi && temp->data.vi != "")
+      {
+        // Kiểm tra xem đáp án này đã có chưa
+        bool exists = false;
+        for (const string &ans : wrongAnswers)
+        {
+          if (ans == temp->data.vi)
+          {
+            exists = true;
+            break;
+          }
+        }
+        if (!exists)
+        {
+          wrongAnswers.push_back(temp->data.vi);
+        }
+      }
+      temp = temp->next;
+    }
+
+    // Nếu không đủ đáp án sai, tạo thêm đáp án giả
+    while (wrongAnswers.size() < 3)
+    {
+      wrongAnswers.push_back("Dap an gia " + to_string(wrongAnswers.size() + 1));
+    }
+
+    // Điền các đáp án sai vào các vị trí còn lại
+    int wrongIndex = 0;
+    for (int k = 0; k < 4; k++)
+    {
+      if (k != correctPos)
+      {
+        answers[k] = wrongAnswers[wrongIndex++];
+      }
+    }
+
+    // Hiển thị các lựa chọn
+    char options[] = {'A', 'B', 'C', 'D'};
+    for (int k = 0; k < 4; k++)
+    {
+      cout << options[k] << ". " << answers[k] << endl;
+    }
+
+    // Nhận đáp án từ người chơi
+    char userChoice;
+    cout << "Nhap lua chon (A/B/C/D): ";
+    cin >> userChoice;
+
+    // Chuyển về chữ hoa nếu là chữ thường
+    if (userChoice >= 'a' && userChoice <= 'd')
+    {
+      userChoice = userChoice - 'a' + 'A';
+    }
+
+    // Kiểm tra đáp án
+    char correctChoice = options[correctPos];
+    if (userChoice == correctChoice)
+    {
+      cout << "Dung! +1 diem" << endl;
+      score++;
+    }
+    else
+    {
+      cout << "Sai! Dap an dung la: " << correctChoice << ". " << correctNode->data.vi << endl;
+    }
+  }
+
+  cout << "\n=== KET QUA GAME ===" << endl;
+  cout << "Diem cua ban: " << score << "/" << questions << endl;
+
+  if (score == questions)
+  {
+    cout << "Xuat sac! Ban da tra loi dung tat ca!" << endl;
+  }
+  else if (score >= questions * 0.8)
+  {
+    cout << "Rat tot! Ban da lam duoc " << (score * 100 / questions) << "%!" << endl;
+  }
+  else if (score >= questions * 0.6)
+  {
+    cout << "Kha on! Hay co gang hon nhe!" << endl;
+  }
+  else
+  {
+    cout << "Can co gang them! Hay hoc them tu vung nhe!" << endl;
+  }
 }
 
 int main()
@@ -784,7 +924,7 @@ int main()
   // ds.sortedInsert(w);
   cout << "Danh sach sau khi them tu moi:\n";
   ds.display();
-  ds.wordGame();
+  ds.wordGame2();
   // ds.removeAllWords();
   // cout << "Danh sach sau khi xoa  :\n";
   // ds.prevWord(w);
