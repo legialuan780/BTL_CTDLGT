@@ -103,8 +103,6 @@ void dlist::addLastWord(Word &x)
 
 void dlist::prevWord(Word &x)
 {
-  cout << "Nhap tu tieng Anh: ";
-  getline(cin, x.en);
   Node *a = head;
   while (a != NULL)
   {
@@ -112,7 +110,7 @@ void dlist::prevWord(Word &x)
     {
       if (a->prev != NULL)
       {
-        cout << "Tu truoc cua: " << x.en << "la: " << a->prev->data.id << " " << a->prev->data.en << endl;
+        cout << "Tu truoc cua: " << x.en << " la: " << a->prev->data.id << " " << a->prev->data.en << endl;
       }
       else
       {
@@ -367,32 +365,48 @@ void dlist::quickSort2(Node *&low, Node *&high)
 void dlist::sortedInsert(Word &x)
 {
   Node *newNode = createNode(x);
+
+  
   if (head == NULL)
   {
     head = tail = newNode;
     size++;
+    return;
   }
+
+
   if (x.en <= head->data.en)
   {
     newNode->next = head;
     head->prev = newNode;
     head = newNode;
     size++;
+    return;
   }
-  // traverse the list to find the correct position
+
+
   Node *curr = head;
   while (curr->next != NULL && curr->next->data.en < x.en)
   {
     curr = curr->next;
   }
-  // insert the new node
+
+ 
   newNode->next = curr->next;
+  newNode->prev = curr;
+
   if (curr->next != NULL)
   {
     curr->next->prev = newNode;
   }
+  else
+  {
+    
+    tail = newNode;
+  }
+
   curr->next = newNode;
-  newNode->prev = curr;
+  size++;
 }
 
 void dlist::display()
@@ -461,7 +475,8 @@ void dlist::saveToFile(const string &filename)
   }
 
   file.close();
-  cout << "Da luu thao tac vao file " << filename << endl;
+  cout << endl
+       << "Da luu thao tac vao file " << filename << endl;
 }
 
 void menu()
@@ -917,19 +932,18 @@ void runProgram()
   string removeWord;
   Word newWord;
   Word sortedWord;
-  Node *lastNode = ds.getlastNode();
+
   while (choice1 != 0)
   {
-    menu2();
     cout << endl
          << "Moi nhap lua chon: " << endl;
     cin >> choice1;
     cin.ignore();
+    Node *lastNode = ds.getlastNode();
     switch (choice1)
     {
     case 1:
       ds.readFromFile("data.txt");
-      ds.saveToFile("data2.txt");
       cout << endl
            << "---Nhap file thanh cong---";
       cout << endl
@@ -1044,8 +1058,5 @@ void runProgram()
 
 int main()
 {
-  User s;
-  s.loginMenu();
   runProgram();
-  return 0;
 }
