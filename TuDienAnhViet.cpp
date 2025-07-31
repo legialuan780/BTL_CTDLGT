@@ -4,7 +4,7 @@ using namespace std;
 #include <sstream>
 #include <ctime>
 #include <cstdlib>
-
+#include <vector> 
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
@@ -466,44 +466,136 @@ void dlist::saveToFile(const string &filename)
 
 void dlist::wordGame()
 {
-
-  if (head == NULL)
-  {
-    cout << "Danh sach tu dien rong, khong the choi game." << endl;
-    return;
-  }
-
-  srand(time(0)); // Khởi tạo seed cho random
-
-  int score = 0;
-  int questions = 5; // số câu hỏi
-
-  for (int i = 0; i < questions; ++i)
-  {
-    // Chọn ngẫu nhiên 1 từ
-    int index = rand() % sizeDict();
-    Node *current = head;
-    for (int j = 0; j < index; ++j)
+    if (head == NULL)
     {
-      current = current->next;
+        cout << "Danh sach tu dien rong, khong the choi game." << endl;
+        return;
     }
 
-    string userAnswer;
-    cout << "Tu tieng Anh: " << current->data.en << "\nNghia tieng Viet la gi? ";
-    getline(cin, userAnswer);
-
-    if (userAnswer == current->data.vi)
+    if (sizeDict() < 4)
     {
-      cout << "Dung!\n";
-      score++;
+        cout << "Tu dien can it nhat 4 tu de choi game trac nghiem." << endl;
+        return;
+    }
+
+    srand(time(0)); //khoi tao seed rnd 
+
+    int score = 0;
+    int questions = 5; //so cau hoi 
+
+    for (int i = 0; i < questions; ++i)
+    {
+        cout << "\n=== Cau hoi " << (i + 1) << "/" << questions << " ===" << endl;
+        
+        //chon ngau nhien 1 tu lm da an dung
+        int correctIndex = rand() % sizeDict();
+        Node *correctNode = head;
+        for (int j = 0; j < correctIndex; ++j)
+        {
+            correctNode = correctNode->next;
+        }
+
+        cout << "Tu tieng Anh: " << correctNode->data.en << endl;
+        cout << "Chon nghia dung:" << endl;
+
+        //tao mang luu 4 dap an
+        string answers[4];
+        int correctPos = rand() % 4; //vi tri dap an dung
+        
+        //dat dap an dung vao vi tri ngau nhien
+        answers[correctPos] = correctNode->data.vi;
+
+        //tao dap an sai
+        vector<string> wrongAnswers;
+        Node *temp = head;
+        while (temp != NULL && wrongAnswers.size() < 3)
+        {
+            if (temp->data.vi != correctNode->data.vi && temp->data.vi != "")
+            {
+                //check vi tri dap an co ch
+                bool exists = false;
+                for (const string& ans : wrongAnswers)
+                {
+                    if (ans == temp->data.vi)
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists)
+                {
+                    wrongAnswers.push_back(temp->data.vi);
+                }
+            }
+            temp = temp->next;
+        }
+
+        //neu dap an sai k du, tao them dap an gia
+        while (wrongAnswers.size() < 3)
+        {
+            wrongAnswers.push_back("Dap an gia " + to_string(wrongAnswers.size() + 1));
+        }
+
+        //dien cac dap an sai vao vi tri con lai
+        int wrongIndex = 0;
+        for (int k = 0; k < 4; k++)
+        {
+            if (k != correctPos)
+            {
+                answers[k] = wrongAnswers[wrongIndex++];
+            }
+        }
+
+        //hien thi cac lua chon
+        char options[] = {'A', 'B', 'C', 'D'};
+        for (int k = 0; k < 4; k++)
+        {
+            cout << options[k] << ". " << answers[k] << endl;
+        }
+
+        //nhan dap an tu ng choi
+        char userChoice;
+        cout << "Nhap lua chon (A/B/C/D): ";
+        cin >> userChoice;
+        
+        //chuyen ve chu hoa neu la chu thg
+        if (userChoice >= 'a' && userChoice <= 'd')
+        {
+            userChoice = userChoice - 'a' + 'A';
+        }
+
+        //check dap an
+        char correctChoice = options[correctPos];
+        if (userChoice == correctChoice)
+        {
+            cout << "Dung! +1 diem" << endl;
+            score++;
+        }
+        else
+        {
+            cout << "Sai! Dap an dung la: " << correctChoice << ". " << correctNode->data.vi << endl;
+        }
+    }
+
+    cout << "\n=== KET QUA GAME ===" << endl;
+    cout << "Diem cua ban: " << score << "/" << questions << endl;
+    
+    if (score == questions)
+    {
+        cout << "Xuat sac! Ban da tra loi dung tat ca!" << endl;
+    }
+    else if (score >= questions * 0.8)
+    {
+        cout << "Rat tot! Ban da lam duoc " << (score * 100 / questions) << "%!" << endl;
+    }
+    else if (score >= questions * 0.6)
+    {
+        cout << "Kha on! Hay co gang hon nhe!" << endl;
     }
     else
     {
-      cout << "Sai. Dap an dung la: " << current->data.vi << "\n";
+        cout << "Can co gang them! Hay hoc them tu vung nhe!" << endl;
     }
-  }
-
-  cout << "\nDiem cua ban: " << score << "/" << questions << endl;
 }
 
 void menu()
