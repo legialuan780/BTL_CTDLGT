@@ -815,45 +815,209 @@ void user::loginMenu(){
     }
 }
 
+void displayMenu()
+{
+    printf("\n\t+------------------------------------------------------------+\n");
+    printf("\t|              CHUONG TRINH TU DIEN ANH - VIET               |\n");
+    printf("\t+------------------------------------------------------------+\n");
+    printf("\t|  1.  Them tu moi                                           |\n");
+    printf("\t|  2.  Hien thi danh sach tu                                 |\n");
+    printf("\t|  3.  Tim kiem tu                                           |\n");
+    printf("\t|  4.  Sua tu                                                |\n");
+    printf("\t|  5.  Xoa tu dau tien                                       |\n");
+    printf("\t|  6.  Xoa tu cuoi cung                                      |\n");
+    printf("\t|  7.  Xoa tu theo ten                                       |\n");
+    printf("\t|  8.  Xoa tat ca tu                                         |\n");
+    printf("\t|  9.  Xoa tu trung lap                                      |\n");
+    printf("\t| 10.  Sap xep tang dan (A-Z)                                |\n");
+    printf("\t| 11.  Sap xep giam dan (Z-A)                                |\n");
+    printf("\t| 12.  Tim tu truoc do                                       |\n");
+    printf("\t| 13.  Hien thi so luong tu                                  |\n");
+    printf("\t| 14.  Choi game trac nghiem                                 |\n");
+    printf("\t| 15.  Luu vao file                                          |\n");
+    printf("\t|  0.  Thoat chuong trinh                                    |\n");
+    printf("\t+------------------------------------------------------------+\n");
+    printf("\n\t---> Nhap lua chon cua ban: ");
+}
+
+// Ham xu ly menu chinh
+void mainMenu(Dlist &ds)
+{
+    Word w;
+    int choice;
+    string searchWord, editWord, removeWord;
+    
+    do {
+        displayMenu();
+        scanf("%d", &choice);
+        
+        switch(choice) {
+            case 1: {
+                printf("\n--- THEM TU MOI ---\n");
+                inputWord(w);
+                ds.addLastWord(w);
+                printf("Da them tu thanh cong!\n");
+                break;
+            }
+            
+            case 2: {
+                printf("\n--- DANH SACH TU DIEN ---\n");
+                ds.display();
+                break;
+            }
+            
+            case 3: {
+                printf("\n--- TIM KIEM TU ---\n");
+                cin.ignore();
+                cout << "Nhap tu can tim: ";
+                getline(cin, searchWord);
+                ds.search(searchWord);
+                break;
+            }
+            
+            case 4: {
+                printf("\n--- SUA TU ---\n");
+                cin.ignore();
+                cout << "Nhap tu can sua: ";
+                getline(cin, editWord);
+                printf("Nhap thong tin tu moi:\n");
+                inputWord(w);
+                ds.editWord(editWord, w);
+                break;
+            }
+            
+            case 5: {
+                printf("\n--- XOA TU DAU TIEN ---\n");
+                ds.removeFirstWord();
+                printf("Da xoa tu dau tien!\n");
+                break;
+            }
+            
+            case 6: {
+                printf("\n--- XOA TU CUOI CUNG ---\n");
+                ds.removeLastWord();
+                printf("Da xoa tu cuoi cung!\n");
+                break;
+            }
+            
+            case 7: {
+                printf("\n--- XOA TU THEO TEN ---\n");
+                cin.ignore();
+                cout << "Nhap tu can xoa: ";
+                getline(cin, removeWord);
+                ds.removeWord(removeWord);
+                break;
+            }
+            
+            case 8: {
+                printf("\n--- XOA TAT CA TU ---\n");
+                printf("Ban co chac chan muon xoa tat ca tu? (y/n): ");
+                char confirm;
+                scanf(" %c", &confirm);
+                if(confirm == 'y' || confirm == 'Y') {
+                    ds.removeAllWords();
+                    printf("Da xoa tat ca tu!\n");
+                } else {
+                    printf("Huy bo thao tac xoa!\n");
+                }
+                break;
+            }
+            
+            case 9: {
+                printf("\n--- XOA TU TRUNG LAP ---\n");
+                ds.removeDuplicate();
+                printf("Da xoa cac tu trung lap!\n");
+                break;
+            }
+            
+            case 10: {
+                printf("\n--- SAP XEP TANG DAN (A-Z) ---\n");
+                Node *lastNode = ds.getlastNode();
+                if(lastNode != NULL) {
+                    ds.quickSort(ds.head, lastNode);
+                    printf("Da sap xep tu dien theo thu tu tang dan!\n");
+                } else {
+                    printf("Danh sach rong, khong the sap xep!\n");
+                }
+                break;
+            }
+            
+            case 11: {
+                printf("\n--- SAP XEP GIAM DAN (Z-A) ---\n");
+                Node *lastNode = ds.getlastNode();
+                if(lastNode != NULL) {
+                    ds.quickSort2(ds.head, lastNode);
+                    printf("Da sap xep tu dien theo thu tu giam dan!\n");
+                } else {
+                    printf("Danh sach rong, khong the sap xep!\n");
+                }
+                break;
+            }
+            
+            case 12: {
+                printf("\n--- TIM TU TRUOC DO ---\n");
+                cin.ignore();
+                ds.prevWord(w);
+                break;
+            }
+            
+            case 13: {
+                printf("\n--- SO LUONG TU ---\n");
+                printf("So luong tu trong tu dien: %d tu\n", ds.sizeDict());
+                break;
+            }
+            
+            case 14: {
+                printf("\n--- GAME TRAC NGHIEM ---\n");
+                ds.wordGame();
+                break;
+            }
+            
+            case 15: {
+                printf("\n--- LUU VAO FILE ---\n");
+                ds.saveToFile("data.txt");
+                break;
+            }
+            
+            case 0: {
+                printf("\n--- THOAT CHUONG TRINH ---\n");
+                printf("Ban co muon luu du lieu truoc khi thoat? (y/n): ");
+                char saveChoice;
+                scanf(" %c", &saveChoice);
+                if(saveChoice == 'y' || saveChoice == 'Y') {
+                    ds.saveToFile("data.txt");
+                }
+                printf("Cam on ban da su dung chuong trinh tu dien!\n");
+                break;
+            }
+            
+            default: {
+                printf("\nLua chon khong hop le! Vui long nhap lai.\n");
+                break;
+            }
+        }
+        
+        // Tam dung de nguoi dung xem ket qua
+        if(choice != 0) {
+            printf("\nNhan Enter de tiep tuc...");
+            getchar();
+            getchar();
+        }
+        
+    } while(choice != 0);
+}
+
 int main()
 {
-  User s;
-  s.loginMenu();
-  Word w;
-  Dlist ds;
-  // cout << "Nhap so luong tu: ";
-  // int n;
-  // cin >> n;
-
-  // cout << "Nhap lan luot tu tieng Anh va nghia tieng Viet:\n";
-  // for (int i = 0; i < n; i++)
-  // {
-  //   inputWord(w);
-  //   ds.addLastWord(w);
-  // }
-  ds.readFromFile("data.txt");
-
-  cout << "Danh sach tu dien:\n";
-  Node *lastNode = ds.getlastNode();
-  cout << "lastNode: " << lastNode->data.en << endl;
-  ds.quickSort(ds.head, lastNode);
-  ds.saveToFile("data2.txt");
-  cout << "Nhap tu de tim tu truoc: " << endl;
-  // inputWord(w);
-  // ds.sortedInsert(w);
-  cout << "Danh sach sau khi them tu moi:\n";
-  ds.display();
-  ds.wordGame();
-  // ds.removeAllWords();
-  // cout << "Danh sach sau khi xoa  :\n";
-  // ds.prevWord(w);
-  // ds.display();
-  // // cout << "Nhap tu can sua: ";
-  // string word;
-  // getline(cin, word);
-  // Word newWord;
-  // inputWord(newWord);
-  // ds.editWord(word, newWord);
-  // ds.display();
-  return 0;
+    User s;
+//    s.loginMenu();
+    
+    Dlist ds;
+    
+    // Doc du lieu tu file khi khoi dong
+    ds.readFromFile("data.txt");
+    printf("_Chuong trinh da co san danh sach mot so tu vung. Vui long chon (2) de xem._\n");
+    mainMenu(ds);
+    
+    return 0;
 }
