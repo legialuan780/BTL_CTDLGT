@@ -687,30 +687,39 @@ int user::login(){
 
 //Them ham menu dang nhap
 void user::loginMenu(){
-    int luaChon;
+    int choice;
     
-    printf("=== HE THONG DANG NHAP UNG DUNG TU DIEN ===\n");
-    printf("1. Dang ky tai khoan moi\n");
-    printf("2. Dang nhap\n");
-    printf("Lua chon cua ban: ");
-    scanf("%d", &luaChon);
-    
-    switch (luaChon) {
-        case 1:
-            reg();
-            // Sau khi dang ky, tu dong chuyen sang dang nhap
-            if (!login()) {
-                exit(1);
-            }
-            break;
-        case 2:
-            if (!login()) {
-                exit(1);
-            }
-            break;
-        default:
-            printf("Lua chon khong hop le!\n");
-            exit(1);
+    while (1) {
+        printf("=== HE THONG DANG NHAP UNG DUNG TU DIEN ===\n");
+        printf("1. Dang ky tai khoan moi\n");
+        printf("2. Dang nhap\n");
+        printf("0. Thoat chuong trinh.\n");
+        printf("Nhap lua chon: ");
+        scanf("%d", &choice);
+        
+        switch (choice){
+            case 1:
+                reg();
+                // Sau khi dang ky, quay lai menu
+                printf("\nNhan Enter de tiep tuc...\n");
+                getchar(); // doc ky tu newline con lai
+                getchar(); // cho nguoi dung nhan Enter
+                break;
+            case 2:
+                if (login()){
+                    return; // Dang nhap thanh cong, thoat khoi menu
+                }
+                else{
+                    exit(1); // Het so lan thu, thoat chuong trinh
+                }
+                break;
+            case 0:
+            	printf("Dang thoat chuong trinh...\n");
+            	exit(1);
+            default:
+                printf("Lua chon khong hop le!\n\n");
+                break;
+        }
     }
 }
 
