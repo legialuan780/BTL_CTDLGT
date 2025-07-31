@@ -366,14 +366,12 @@ void dlist::sortedInsert(Word &x)
 {
   Node *newNode = createNode(x);
 
-  
   if (head == NULL)
   {
     head = tail = newNode;
     size++;
     return;
   }
-
 
   if (x.en <= head->data.en)
   {
@@ -384,14 +382,12 @@ void dlist::sortedInsert(Word &x)
     return;
   }
 
-
   Node *curr = head;
   while (curr->next != NULL && curr->next->data.en < x.en)
   {
     curr = curr->next;
   }
 
- 
   newNode->next = curr->next;
   newNode->prev = curr;
 
@@ -401,7 +397,7 @@ void dlist::sortedInsert(Word &x)
   }
   else
   {
-    
+
     tail = newNode;
   }
 
@@ -481,7 +477,8 @@ void dlist::saveToFile(const string &filename)
 
 void menu()
 {
-  cout << "=====Chuong trinh tu dien Anh-Viet=====" << endl;
+  cout << endl
+       << "=====Chuong trinh tu dien Anh-Viet=====" << endl;
   cout << "***Them tu dien***" << endl;
   cout << "1. Nhap bo tu dien co san" << endl;
   cout << "2. Nhap thu cong" << endl;
@@ -935,6 +932,7 @@ void runProgram()
 
   while (choice1 != 0)
   {
+    menu();
     cout << endl
          << "Moi nhap lua chon: " << endl;
     cin >> choice1;
@@ -951,7 +949,7 @@ void runProgram()
       break;
     case 2:
       cout << endl
-           << "---Moi ban nhap tu dien---" << endl;
+           << "---Moi ban nhap tu dien---(Nhan Enter de nhap)" << endl;
       inputWord(w);
       ds.addLastWord(w);
       ds.saveToFile("data2.txt");
@@ -976,7 +974,7 @@ void runProgram()
       ds.search(editWord);
 
       cout << endl
-           << "---Nhap tu moi--" << endl;
+           << "---Nhap tu moi--(Nhan Enter de nhap)" << endl;
       inputWord(newWord);
       ds.editWord(editWord, newWord);
       ds.saveToFile("data2.txt");
@@ -998,6 +996,9 @@ void runProgram()
            << "So luong tu hien tai: " << ds.sizeDict();
       break;
     case 8:
+      cout << endl
+           << "---Nhap tu can xoa--" << endl;
+      getline(cin, removeWord);
       ds.removeWord(removeWord);
       cout << endl
            << "Da xoa tu " << removeWord;
@@ -1035,7 +1036,7 @@ void runProgram()
       break;
     case 13:
       cout << endl
-           << "---Nhap tu moi---" << endl;
+           << "---Nhap tu moi---(Nhan Enter de nhap)" << endl;
       inputWord(sortedWord);
       ds.sortedInsert(sortedWord);
       ds.saveToFile("data2.txt");
@@ -1058,5 +1059,7 @@ void runProgram()
 
 int main()
 {
+  User s;
+  s.loginMenu();
   runProgram();
 }
