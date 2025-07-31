@@ -4,6 +4,11 @@ using namespace std;
 #include <sstream>
 #include <ctime>
 #include <cstdlib>
+
+#include <stdio.h>
+#include <string.h>
+#include <conio.h>
+
 typedef struct word
 {
   string en;
@@ -506,8 +511,213 @@ void menu()
   cout << "=====Chuong trinh tu dien Anh-Viet=====\n";
 }
 
+typedef struct user{
+	int checkLoginName(char *username);
+	int checkPass(char *password);
+	void hidePass(char *password);
+	void saveAcc(char *username, char *password);
+	int checkLogin(char *username, char *password);
+	int reg();
+	int login();
+	void loginMenu();
+}User;
+
+int user::checkLoginName(char *username){
+    if (strlen(username) >= 5) {
+        return 1;
+    }
+    return 0;
+}
+
+int user::checkPass(char *password){
+    int len = strlen(password);
+    int coHoa = 0, coThuong = 0, coSo = 0;
+    
+    if (len < 8) {
+        return 0;
+    }
+    
+    for (int i = 0; i < len; i++) {
+        if (password[i] >= 'A' && password[i] <= 'Z'){
+            coHoa = 1;
+        }
+        else if (password[i] >= 'a' && password[i] <= 'z'){
+            coThuong = 1;
+        }
+        else if (password[i] >= '0' && password[i] <= '9'){
+            coSo = 1;
+        }
+    }
+    
+    return (coHoa && coThuong && coSo);
+}
+
+void user::hidePass(char *password){
+    int i = 0;
+    char ch;
+    
+    while ((ch = getch()) != '\r' && i < 49) { //Enter = '\r', max 49 ky tu
+        if (ch == '\b' && i > 0) { // Backspace
+            printf("\b \b");
+            i--;
+        }
+        else if (ch != '\b'){
+            password[i] = ch;
+            printf("*");
+            i++;
+        }
+    }
+    password[i] = '\0';
+    printf("\n");
+}
+
+void user::saveAcc(char *username, char *password){
+    FILE *file = fopen("accounts.txt", "a");
+    if (file != NULL) {
+        fprintf(file, "%s|%s\n", username, password);
+        fclose(file);
+        printf("Tai khoan da duoc luu thanh cong!\n");
+    }
+    else {
+        printf("Loi: Khong the luu tai khoan.\n");
+    }
+}
+
+int user::checkLogin(char *username, char *password){
+    FILE *file = fopen("accounts.txt", "r");
+    char line[200];
+    char fileUsername[50], filePassword[50];
+    
+    if (file == NULL) {
+        printf("Chua co tai khoan nao duoc tao.\n");
+        return 0;
+    }
+    
+    while (fgets(line, sizeof(line), file)) {
+        //Loai bo ky tu xuong dong
+        line[strcspn(line, "\n")] = 0;
+        
+        // Tach username va password
+        char *token = strtok(line, "|");
+        if (token != NULL) {
+            strcpy(fileUsername, token);
+            token = strtok(NULL, "|");
+            if (token != NULL) {
+                strcpy(filePassword, token);
+                
+                //Kiem tra khop
+                if (strcmp(username, fileUsername) == 0 && 
+                    strcmp(password, filePassword) == 0) {
+                    fclose(file);
+                    return 1;
+                }
+            }
+        }
+    }
+    
+    fclose(file);
+    return 0;
+}
+
+int user::reg(){
+    char username[50], password[50], confirmPassword[50];
+    
+    printf("=== DANG KY TAI KHOAN ===\n");
+    
+    //Nhap ten dang nhap
+    do {
+        printf("Nhap ten dang nhap (it nhat 5 ky tu): ");
+        scanf("%s", username);
+        
+        if (!checkLoginName(username)) {
+            printf("Ten dang nhap phai co it nhat 5 ky tu!\n");
+        }
+    } while (!checkLoginName(username));
+    
+    //Nhap mat khau
+    do{
+        printf("Nhap mat khau (it nhat 8 ky tu, co chu hoa, chu thuong va so): ");
+        hidePass(password);
+        
+        if (!checkPass(password)) {
+            printf("Mat khau khong hop le! Phai co it nhat 8 ky tu, chu hoa, chu thuong va so.\n");
+        }
+    } while (!checkPass(password));
+    
+    //Xac nhan mat khau
+    do {
+        printf("Xac nhan lai mat khau: ");
+        hidePass(confirmPassword);
+        
+        if (strcmp(password, confirmPassword) != 0){
+            printf("Mat khau xac nhan khong khop!\n");
+        }
+    } while (strcmp(password, confirmPassword) != 0);
+    
+    saveAcc(username, password);
+    return 1;
+}
+
+int user::login(){
+    char username[50], password[50];
+    int soLanThu = 0;
+    
+    printf("=== DANG NHAP ===\n");
+    
+    while (soLanThu < 3) {
+        printf("Ten dang nhap: ");
+        scanf("%s", username);
+        
+        printf("Mat khau: ");
+        hidePass(password);
+        
+        if (checkLogin(username, password)) {
+            printf("Dang nhap thanh cong! Chao mung %s!\n", username);
+            return 1;
+        }
+        else {
+            soLanThu++;
+            printf("Sai ten dang nhap hoac mat khau! Con lai %d lan thu.\n", 3 - soLanThu);
+        }
+    }
+    
+    printf("Da het so lan thu. Chuong trinh se thoat.\n");
+    return 0;
+}
+
+//Them ham menu dang nhap
+void user::loginMenu(){
+    int luaChon;
+    
+    printf("=== HE THONG DANG NHAP UNG DUNG TU DIEN ===\n");
+    printf("1. Dang ky tai khoan moi\n");
+    printf("2. Dang nhap\n");
+    printf("Lua chon cua ban: ");
+    scanf("%d", &luaChon);
+    
+    switch (luaChon) {
+        case 1:
+            reg();
+            // Sau khi dang ky, tu dong chuyen sang dang nhap
+            if (!login()) {
+                exit(1);
+            }
+            break;
+        case 2:
+            if (!login()) {
+                exit(1);
+            }
+            break;
+        default:
+            printf("Lua chon khong hop le!\n");
+            exit(1);
+    }
+}
+
 int main()
 {
+  User s;
+  s.loginMenu();
   Word w;
   Dlist ds;
   // cout << "Nhap so luong tu: ";
