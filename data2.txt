@@ -1,132 +1,130 @@
-archery|ban cung
-attendant|nguoi phuc vu
-badminton|cau lon
-bag|tui
-barcode reader|may doc ma vach
-baseball|bong chay
-basket|ro, gio
-basketball|bong ro
-beach|bai bien
-boat|thuyen
-bowling|bong go
-boxing|quyen anh
-buy|mua
-captain|thuyen truong
-cash| tien mat
-cashier|nhan vien thu ngan
-cheap|re
-clam|ngheu
-close|dong
-computer|may vi tinh
-contact sport|the thao tiep xuc
-copy|sao chep
-coral|san ho
-coral reef|ran san ho
-counter|quay hang
-crab|cua
-credit card|the tin dung
-customer|khach hang
-cycling|dua xe dap
-database|co so du lieu
-delete|xoa
-discount|giam gia
-disk drive|o dia
-dolphin|ca heo
-expensive|dat 
-file|tep, tap tin
-fish|ca
-fisherman|ngu dan
-golf|danh gon
-greengrocer|cua hang ban rau qua
-hacker|tin tac
-harbor|cang bien
-hard disk|o cung
-helpline|duong day tro giup
-horse racing|dua ngua
-housewares|do gia dung
-ice skating|truot bang
-index card|phieu lam muc luc
-island|dao
-jellyfish|sua
-lacrosse|bong vot
-laptop|may tinh xach tay
-lifeguard|nguoi cuu ho
-lighthouse|hai dang
-magnifying glass|kinh lup
-manager|giam doc, quan ly
-map|ban do
-merge|sat nhap
-money|tien
-monitor|man hinh
-mouse pad|tam lot chuot
-notebook|cuon so, vo
-ocean|dai duong
-octopus|bach tuoc
-open|khoi dong
+thumbtack|dinh ghim
+textbook|sach giao khoa
+test tube|ong nghiem
+tape measure|thuoc day
+stencil|giay nen
+stapler|do dap ghim
+staple remover|cai do ghim bam
+set square|e-ke
+scotch tape|bang dinh trong suot
+scissors|keo
+ruler|thuoc
+ribbon|ruy bang
+protractor|thuoc do goc
+post-in note|giay nho
+pin|dinh ghim
+pencil|butchi
+pencil sharpener|do got but chi
+pencil case|hop but
+pen|but muc
+paper|giay
+paper fastener|dung cu kep giay
+paper clip|kep giay
+palette|bang mau
 paint|son, mau
 paintbrush|choi son
-palette|bang mau
-paper|giay
-paper clip|kep giay
-paper fastener|dung cu kep giay
-pay|tra tien
-pen|but muc
-pencil|butchi
-pencil case|hop but
-pencil sharpener|do got but chi
-pin|dinh ghim
-post-in note|giay nho
-price|gia ca
-printer|may in
-protractor|thuoc do goc
-receipt|bien lai
-ribbon|ruy bang
-ruler|thuoc
-running|chay
-save|luu
-scale|cai can
-scanner|may quet
-scissors|keo
-scotch tape|bang dinh trong suot
+notebook|cuon so, vo
+map|ban do
+magnifying glass|kinh lup
+index card|phieu lam muc luc
 sea|bien
-sea horse|ca ngu
-seagull|mong bien
-seal|hai cau
-seashore|bo bien
-seaweed|rong bien
-select|chon
-sell|ban
-set square|e-ke
-shark|ca map
-shellfish|dong vat co vo
-ship|tau thuy
-shop|cua hang
-skiing|truot tuyet
-software|phan mem
-speaker|loa
-sport|the thao
-staple remover|cai do ghim bam
-stapler|do dap ghim
-starfish|sao bien
-stencil|giay nen
-submarine|tau ngam
-swimming|boi loi
-table tennis|bong ban
-tape measure|thuoc day
-tennis|quan vot
-test tube|ong nghiem
-textbook|sach giao khoa
-thumbtack|dinh ghim
-toolbar|thanh cong cu
-trolley|xe day
-turtle|rua bien
-walking|di bo
-wall|buc tuong
-wallet|vi tien
-water polo|bong nuoc
-water sports|the thao duoi nuoc
-watercolour|mau nuoc
+ocean|dai duong
 wave|song
-weightlifting|cu ta
+island|dao
+harbor|cang bien
+lighthouse|hai dang
+submarine|tau ngam
+ship|tau thuy
+boat|thuyen
+captain|thuyen truong
+fisherman|ngu dan
+lifeguard|nguoi cuu ho
+seashore|bo bien
+beach|bai bien
+seagull|mong bien
 whale|ca voi
+shark|ca map
+dolphin|ca heo
+octopus|bach tuoc
+fish|ca
+jellyfish|sua
+sea horse|ca ngu
+seaweed|rong bien
+coral|san ho
+coral reef|ran san ho
+shellfish|dong vat co vo
+clam|ngheu
+starfish|sao bien
+seal|hai cau
+turtle|rua bien
+crab|cua
+customer|khach hang
+cashier|nhan vien thu ngan
+attendant|nguoi phuc vu
+manager|giam doc, quan ly
+wallet|vi tien
+scale|cai can
+counter|quay hang
+barcode reader|may doc ma vach
+receipt|bien lai
+pay|tra tien
+expensive|dat 
+cheap|re
+discount|giam gia
+sell|ban
+price|gia ca
+trolley|xe day
+credit card|the tin dung
+cash| tien mat
+shop|cua hang
+money|tien
+basket|ro, gio
+bag|tui
+buy|mua
+greengrocer|cua hang ban rau qua
+housewares|do gia dung
+monitor|man hinh
+mouse pad|tam lot chuot
+printer|may in
+scanner|may quet
+open|khoi dong
+close|dong
+delete|xoa
+merge|sat nhap
+helpline|duong day tro giup
+hard disk|o cung
+software|phan mem
+toolbar|thanh cong cu
+database|co so du lieu
+hacker|tin tac
+save|luu
+select|chon
+copy|sao chep
+computer|may vi tinh
+laptop|may tinh xach tay
+speaker|loa
+file|tep, tap tin
+disk drive|o dia
+sport|the thao
+skiing|truot tuyet
+ice skating|truot bang
+horse racing|dua ngua
+running|chay
+walking|di bo
+water sports|the thao duoi nuoc
+boxing|quyen anh
+swimming|boi loi
+basketball|bong ro
+badminton|cau lon
+tennis|quan vot
+table tennis|bong ban
+baseball|bong chay
+cycling|dua xe dap
+golf|danh gon
+contact sport|the thao tiep xuc
+water polo|bong nuoc
+archery|ban cung
+weightlifting|cu ta
 wrestling|dau vat
+bowling|bong go
+lacrosse|bong vot

@@ -111,7 +111,8 @@ void dlist::prevWord(Word &x)
     {
       if (a->prev != NULL)
       {
-        cout << "Tu truoc cua: " << x.en << " la: " << a->prev->data.id << " " << a->prev->data.en << endl;
+        cout << endl
+             << "Tu truoc cua: " << x.en << " la: " << a->prev->data.id << " " << a->prev->data.en << endl;
       }
       else
       {
@@ -183,7 +184,7 @@ void dlist::removeFirstWord()
     delete a;
     size--;
   }
-  else if(head==tail)
+  else if (head == tail)
   {
     delete head;
     head = tail = NULL;
