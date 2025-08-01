@@ -183,6 +183,13 @@ void dlist::removeFirstWord()
     delete a;
     size--;
   }
+  else if(head==tail)
+  {
+    delete head;
+    head = tail = NULL;
+    size = 0;
+    return;
+  }
   else
   {
     cout << "Danh sach rong, khong can xoa." << endl;
