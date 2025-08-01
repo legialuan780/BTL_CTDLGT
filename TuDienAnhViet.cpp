@@ -141,7 +141,8 @@ void dlist::search(string word)
       q->next = p->next; // Xoa node da tim thay khoi danh sach
       p->next = head;    // Di chuyen node da tim thay ve dau
       p->prev = NULL;
-      head = p;
+      head->prev = p; 
+      head = p;       
       return;
     }
     q = p;
