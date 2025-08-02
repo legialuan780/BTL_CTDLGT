@@ -820,13 +820,13 @@ void dlist::wordGame()
   srand(time(0)); // Kh?i t?o seed cho random
 
   int score = 0;
-  int questions = 5; // s? câu h?i
+  int questions = 5; // s? c?u h?i
 
   for (int i = 0; i < questions; ++i)
   {
     cout << "\n=== Cau hoi " << (i + 1) << "/" << questions << " ===" << endl;
 
-    // Ch?n ng?u nhiên 1 t? làm ðáp án ðúng
+    // Ch?n ng?u nhi?n 1 t? l?m ??p ?n ??ng
     int correctIndex = rand() % sizeDict();
     Node *correctNode = head;
     for (int j = 0; j < correctIndex; ++j)
@@ -837,21 +837,21 @@ void dlist::wordGame()
     cout << "Tu tieng Anh: " << correctNode->data.en << endl;
     cout << "Chon nghia dung:" << endl;
 
-    // T?o m?ng lýu 4 ðáp án
+    // T?o m?ng l?u 4 ??p ?n
     string answers[4];
-    int correctPos = rand() % 4; // V? trí c?a ðáp án ðúng (0-3)
+    int correctPos = rand() % 4; // V? tr? c?a ??p ?n ??ng (0-3)
 
-    // Ð?t ðáp án ðúng vào v? trí ng?u nhiên
+    // ??t ??p ?n ??ng v?o v? tr? ng?u nhi?n
     answers[correctPos] = correctNode->data.vi;
 
-    // T?o 3 ðáp án sai
+    // T?o 3 ??p ?n sai
     vector<string> wrongAnswers;
     Node *temp = head;
     while (temp != NULL && wrongAnswers.size() < 3)
     {
       if (temp->data.vi != correctNode->data.vi && temp->data.vi != "")
       {
-        // Ki?m tra xem ðáp án này ð? có chýa
+        // Ki?m tra xem ??p ?n n?y ?? c? ch?a
         bool exists = false;
         for (const string &ans : wrongAnswers)
         {
@@ -869,13 +869,13 @@ void dlist::wordGame()
       temp = temp->next;
     }
 
-    // N?u không ð? ðáp án sai, t?o thêm ðáp án gi?
+    // N?u kh?ng ?? ??p ?n sai, t?o th?m ??p ?n gi?
     while (wrongAnswers.size() < 3)
     {
       wrongAnswers.push_back("Dap an gia " + to_string(wrongAnswers.size() + 1));
     }
 
-    // Ði?n các ðáp án sai vào các v? trí c?n l?i
+    // ?i?n c?c ??p ?n sai v?o c?c v? tr? c?n l?i
     int wrongIndex = 0;
     for (int k = 0; k < 4; k++)
     {
@@ -885,23 +885,23 @@ void dlist::wordGame()
       }
     }
 
-    // Hi?n th? các l?a ch?n
+    // Hi?n th? c?c l?a ch?n
     char options[] = {'A', 'B', 'C', 'D'};
     for (int k = 0; k < 4; k++)
     {
       cout << options[k] << ". " << answers[k] << endl;
     }
 
-    // Nh?n ðáp án t? ngý?i chõi
+    // Nh?n ??p ?n t? ng??i ch?i
     char userChoice;
     cout << "Nhap lua chon (A/B/C/D): ";
     cin >> userChoice;
 
-    // L?p cho ð?n khi nh?n ðý?c ðáp án h?p l?
+    // L?p cho ??n khi nh?n ???c ??p ?n h?p l?
     bool validChoice = false;
     while (!validChoice)
     {
-      // Chuy?n v? ch? hoa n?u là ch? thý?ng
+      // Chuy?n v? ch? hoa n?u l? ch? th??ng
       if (userChoice >= 'a' && userChoice <= 'd')
       {
         userChoice = userChoice - 'a' + 'A';
@@ -919,7 +919,7 @@ void dlist::wordGame()
       }
     }
 
-    // Ki?m tra ðáp án
+    // Ki?m tra ??p ?n
     char correctChoice = options[correctPos];
     if (userChoice == correctChoice)
     {
@@ -955,7 +955,6 @@ void dlist::wordGame()
 
 void runProgram()
 {
-  menu();
   Word w;
   Dlist ds;
   int choice1 = -1;

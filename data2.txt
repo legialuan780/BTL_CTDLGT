@@ -1,4 +1,3 @@
-watercolour|mau nuoc
 thumbtack|dinh ghim
 textbook|sach giao khoa
 test tube|ong nghiem
